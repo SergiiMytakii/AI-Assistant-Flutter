@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -10,7 +12,7 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 part 'auth_bloc.freezed.dart';
 
-@singleton
+@injectable
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   final SignInUseCase _signInUseCase;
@@ -32,6 +34,8 @@ class AuthenticationBloc
 
   void _onCheckStatus(CheckAuthenticationStatus event,
       Emitter<AuthenticationState> emit) async {
+    emit(const AuthenticationState.loading());
+
     final user = await _userStreamUseCase();
     if (user != null) {
       emit(AuthenticationState.authenticated(user));
@@ -42,15 +46,18 @@ class AuthenticationBloc
 
   Future<void> _onSignOutRequested(AuthenticationSignOutRequested event,
       Emitter<AuthenticationState> emit) async {
+    emit(const AuthenticationState.loading());
+
     await _signOutUseCase();
     emit(const AuthenticationState.unauthenticated());
   }
 
   Future<void> _onSignInRequested(AuthenticationSignInRequested event,
       Emitter<AuthenticationState> emit) async {
+    emit(const AuthenticationState.loading());
+
     final result =
         await _signInUseCase(email: event.email, password: event.password);
-    emit(AuthenticationState.error('failure'));
     result.fold(
       (failure) => emit(AuthenticationState.error(failure)),
       (user) => emit(AuthenticationState.authenticated(user)),
@@ -59,6 +66,7 @@ class AuthenticationBloc
 
   Future<void> _onSignUpRequested(AuthenticationSignUpRequested event,
       Emitter<AuthenticationState> emit) async {
+    emit(const AuthenticationState.loading());
     final result =
         await _signUpUseCase(email: event.email, password: event.password);
 

@@ -62,7 +62,7 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i313.SignOutUseCase(gh<_i741.AuthenticationRepository>()));
     gh.factory<_i1045.SignUpUseCase>(
         () => _i1045.SignUpUseCase(gh<_i741.AuthenticationRepository>()));
-    gh.singleton<_i455.AuthenticationBloc>(() => _i455.AuthenticationBloc(
+    gh.factory<_i455.AuthenticationBloc>(() => _i455.AuthenticationBloc(
           gh<_i739.SignInUseCase>(),
           gh<_i1045.SignUpUseCase>(),
           gh<_i313.SignOutUseCase>(),

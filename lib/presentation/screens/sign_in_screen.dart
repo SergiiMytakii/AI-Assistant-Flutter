@@ -58,70 +58,67 @@ class _SignInScreenState extends State<SignInScreen> {
                     'Welcome to....',
                     style: TextStyle(fontSize: 24),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          MyTextField(
-                            controller: _emailController,
-                            hint: 'Email',
-                            validator: _validateEmail,
-                            maxLength: 30,
-                          ),
-                          MyTextField(
-                            controller: _passwordController,
-                            obscureText: true,
-                            hint: 'Password',
-                            validator: _validatePassword,
-                            maxLength: 16,
-                          ),
-                          const SizedBox(height: 16),
-                          Row(
-                            children: [
-                              MyTextButton(
-                                onPressed: () {
-                                  _login();
-                                },
-                                label: 'Login',
-                              ),
-                              const SizedBox(
-                                height: 16,
-                                width: 20,
-                              ),
-                              MyTextButton(
-                                onPressed: () {
-                                  _signup();
-                                },
-                                label: 'Login',
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 50,
-                          ),
-                          TextButton(
-                            onPressed: () async {
-                              final Uri emailLaunchUri = Uri(
-                                scheme: 'mailto',
-                                path: email,
-                                query: encodeQueryParameters(<String, String>{
-                                  'subject': 'app support',
-                                  'body': ''
-                                }),
-                              );
-                              if (await canLaunchUrl(emailLaunchUri)) {
-                                await launchUrl(emailLaunchUri);
-                              } else {
-                                throw 'Could not launch $emailLaunchUri';
-                              }
-                            },
-                            child: const Text(email),
-                          )
-                        ],
-                      ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MyTextField(
+                          controller: _emailController,
+                          hint: 'Email',
+                          validator: _validateEmail,
+                          maxLength: 30,
+                        ),
+                        MyTextField(
+                          controller: _passwordController,
+                          obscureText: true,
+                          hint: 'Password',
+                          validator: _validatePassword,
+                          maxLength: 16,
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          children: [
+                            MyTextButton(
+                              onPressed: () {
+                                _login();
+                              },
+                              label: 'Login',
+                            ),
+                            const Spacer(),
+                            MyTextButton(
+                              onPressed: () {
+                                _signup();
+                              },
+                              label: 'Sign Up',
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            final Uri emailLaunchUri = Uri(
+                              scheme: 'mailto',
+                              path: email,
+                              query: encodeQueryParameters(<String, String>{
+                                'subject': 'app support',
+                                'body': ''
+                              }),
+                            );
+                            if (await canLaunchUrl(emailLaunchUri)) {
+                              await launchUrl(emailLaunchUri);
+                            } else {
+                              throw 'Could not launch $emailLaunchUri';
+                            }
+                          },
+                          child: const Text(email),
+                        )
+                      ],
                     ),
                   ),
                 ],
@@ -129,6 +126,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ),
           BlocConsumer<AuthenticationBloc, AuthenticationState>(
+            bloc: getIt<AuthenticationBloc>(),
             listener: (context, state) {
               state.whenOrNull(
                 error: (message) {

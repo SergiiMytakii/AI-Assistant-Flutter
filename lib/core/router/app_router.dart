@@ -1,4 +1,5 @@
 // lib/app_router.dart
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -22,8 +23,10 @@ final GoRouter router = GoRouter(
   },
   debugLogDiagnostics: true,
   redirect: (BuildContext context, GoRouterState state) {
-    final authBloc = context.read<AuthenticationBloc>();
-    print('Redirecting to ${state.uri}');
+    final authBloc = getIt<AuthenticationBloc>();
+    if (kDebugMode) {
+      print('Redirecting to ${state.uri}');
+    }
     authBloc.state.maybeWhen(
         initial: () => authBloc.add(const CheckAuthenticationStatus()),
         orElse: () {});
@@ -36,7 +39,9 @@ final GoRouter router = GoRouter(
       navigatorKey: _shellNavigatorKey,
       pageBuilder: (BuildContext context, GoRouterState state, Widget child) {
         final authState = context.watch<AuthenticationBloc>().state;
-        print('state: $authState');
+        if (kDebugMode) {
+          print('state: $authState');
+        }
         return authState.maybeWhen(
           authenticated: (User user) {
             return NoTransitionPage<void>(
