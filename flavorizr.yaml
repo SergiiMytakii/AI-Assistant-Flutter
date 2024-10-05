@@ -1,0 +1,48 @@
+app:
+  android:
+    flavorDimensions: "environment"
+    flavors:
+      dev:
+        applicationId: "com.example.mytemplate.dev"
+        resValues:
+          string:
+            app_name: "My Template Dev"
+      prod:
+        applicationId: "com.example.mytemplate"
+        resValues:
+          string:
+            app_name: "My Template Prod"
+  ios:
+    flavors:
+      dev:
+        bundleId: "com.example.mytemplate.dev"
+        buildSettings:
+          PRODUCT_BUNDLE_IDENTIFIER: "com.example.mytemplate.dev"
+      prod:
+        bundleId: "com.example.mytemplate"
+        buildSettings:
+          PRODUCT_BUNDLE_IDENTIFIER: "com.example.mytemplate"
+  targets:
+    android:
+      - dev
+      - prod
+    ios:
+      - dev
+      - prod
+flavors:
+  dev:
+    app:
+      name: "My Template Dev"
+      bundleId: "com.example.mytemplate.dev"
+    firebase:
+      google-services:
+        android: "android/app/src/dev/google-services.json"
+        ios: "ios/Runner/Dev/GoogleService-Info.plist"
+  prod:
+    app:
+      name: "My Template Prod"
+      bundleId: "com.example.mytemplate"
+    firebase:
+      google-services:
+        android: "android/app/src/prod/google-services.json"
+        ios: "ios/Runner/Prod/GoogleService-Info.plist"
