@@ -1,11 +1,8 @@
-import 'package:my_template/injection.dart';
-
 import 'flavors.dart';
 
 import 'main.dart' as runner;
 
-Future<void> main() async {
-  configureDependencies(Flavor.dev.name);
+void main() {
   F.appFlavor = Flavor.dev;
-  await runner.main();
+  runner.main();
 }

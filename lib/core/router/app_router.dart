@@ -8,6 +8,7 @@ import 'package:my_template/injection.dart';
 import 'package:my_template/presentation/bloc/bloc/auth_bloc.dart';
 import 'package:my_template/presentation/screens/home_screen.dart';
 import 'package:my_template/presentation/screens/root_screen.dart';
+import 'package:my_template/presentation/screens/settings_screen.dart';
 import 'package:my_template/presentation/screens/sign_in_screen.dart';
 import 'package:my_template/presentation/screens/some_screen.dart';
 
@@ -39,9 +40,6 @@ final GoRouter router = GoRouter(
       navigatorKey: _shellNavigatorKey,
       pageBuilder: (BuildContext context, GoRouterState state, Widget child) {
         final authState = context.watch<AuthenticationBloc>().state;
-        if (kDebugMode) {
-          print('state: $authState');
-        }
         return authState.maybeWhen(
           authenticated: (User user) {
             return NoTransitionPage<void>(
@@ -62,11 +60,20 @@ final GoRouter router = GoRouter(
           },
         ),
         GoRoute(
-          path: '/somepage',
+          path: '/somescreen',
           pageBuilder: (BuildContext context, GoRouterState state) {
             return NoTransitionPage<void>(
               key: state.pageKey,
               child: const SomeScreen(),
+            );
+          },
+        ),
+        GoRoute(
+          path: '/settings',
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return NoTransitionPage<void>(
+              key: state.pageKey,
+              child: const SettingsScreen(),
             );
           },
         ),

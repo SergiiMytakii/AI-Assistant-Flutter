@@ -43,6 +43,8 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _emailController.text = 'test@gmail.com';
+    _passwordController.text = '111124';
     return Scaffold(
       body: Stack(
         children: [

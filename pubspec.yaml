@@ -33,6 +33,7 @@ dependencies:
   logger: any
   flutter_flavorizr: any
   json_annotation: ^4.9.0
+  shared_preferences: any
   url_launcher: any
 
   #web

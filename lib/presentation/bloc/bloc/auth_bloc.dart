@@ -12,7 +12,7 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 part 'auth_bloc.freezed.dart';
 
-@injectable
+@singleton
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   final SignInUseCase _signInUseCase;

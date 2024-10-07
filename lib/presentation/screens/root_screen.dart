@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:go_router/go_router.dart';
@@ -43,36 +44,28 @@ class _RootScreenState extends State<RootScreen> {
                       });
                       switch (index) {
                         case 0:
-                          context.go('/somepage');
+                          context.go('/');
                           break;
                         case 1:
-                          context.go('/notifications');
+                          context.go('/somescreen');
                           break;
                         case 2:
-                          context.go('/bible-study');
-                          break;
-                        case 3:
-                          context.go('/video');
-                          break;
-                        case 4:
-                          context.go('/feedbacks');
-                        case 5:
-                          context.go('/q&a');
+                          context.go('/settings');
                           break;
                       }
                     },
-                    destinations: const [
+                    destinations: [
                       NavigationRailDestination(
-                        icon: Icon(Icons.music_note),
-                        label: Text('Songs'),
+                        icon: const Icon(Icons.home),
+                        label: Text('Home'.tr()),
                       ),
                       NavigationRailDestination(
-                        icon: Icon(Icons.notifications),
-                        label: Text('Notifications'),
+                        icon: const Icon(Icons.notifications),
+                        label: Text('Some Screen'.tr()),
                       ),
                       NavigationRailDestination(
-                        icon: Icon(Icons.menu_book),
-                        label: Text('Bible Study'),
+                        icon: const Icon(Icons.settings),
+                        label: Text('Settings'.tr()),
                       ),
                     ],
                   ),
@@ -106,13 +99,13 @@ class _RootScreenState extends State<RootScreen> {
           });
           switch (index) {
             case 0:
-              context.go('/somepage');
+              context.go('/');
               break;
             case 1:
-              context.go('/notifications');
+              context.go('/somescreen');
               break;
             case 2:
-              context.go('/bible-study');
+              context.go('/settings');
               break;
           }
         },
@@ -123,11 +116,11 @@ class _RootScreenState extends State<RootScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications),
-            label: 'Notifications',
+            label: 'Some Screen',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book),
-            label: 'Bible Study',
+            icon: Icon(Icons.settings),
+            label: 'Settings',
           ),
         ],
       ),

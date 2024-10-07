@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_template/core/constants/constants.dart';
 import 'package:my_template/core/router/app_router.dart';
 import 'package:my_template/injection.dart';
 import 'package:my_template/presentation/bloc/bloc/auth_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'flavors.dart';
 
@@ -12,19 +14,27 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: F.title,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: _flavorBanner(
-        child: BlocProvider(
-          create: (context) => getIt<AuthenticationBloc>(),
-          child: MaterialApp.router(
-            routerConfig: router,
-          ),
+    return EasyLocalization(
+      useOnlyLangCode: true,
+      supportedLocales: languagesCodes.keys
+          .map((languageCode) => Locale(languageCode))
+          .toList(),
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en', 'US'),
+      child: MaterialApp(
+        title: F.title,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
         ),
-        show: kDebugMode,
+        home: _flavorBanner(
+          child: BlocProvider(
+            create: (context) => getIt<AuthenticationBloc>(),
+            child: MaterialApp.router(
+              routerConfig: router,
+            ),
+          ),
+          show: kDebugMode,
+        ),
       ),
     );
   }
@@ -42,7 +52,7 @@ class App extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                   fontSize: 12.0,
                   letterSpacing: 1.0),
-              textDirection: TextDirection.ltr,
+              // textDirection: TextDirection.LTR ,
               child: child,
             )
           : Container(
