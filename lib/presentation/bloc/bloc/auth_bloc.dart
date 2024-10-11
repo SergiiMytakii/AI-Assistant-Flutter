@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -59,7 +57,8 @@ class AuthenticationBloc
     final result =
         await _signInUseCase(email: event.email, password: event.password);
     result.fold(
-      (failure) => emit(AuthenticationState.error(failure)),
+      (failure) =>
+          emit(AuthenticationState.error(failure.toUserFriendlyMessage())),
       (user) => emit(AuthenticationState.authenticated(user)),
     );
   }
@@ -71,7 +70,8 @@ class AuthenticationBloc
         await _signUpUseCase(email: event.email, password: event.password);
 
     result.fold(
-      (failure) => emit(AuthenticationState.error(failure)),
+      (failure) =>
+          emit(AuthenticationState.error(failure.toUserFriendlyMessage())),
       (user) => emit(AuthenticationState.authenticated(user)),
     );
   }

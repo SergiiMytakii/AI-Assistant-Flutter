@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:injectable/injectable.dart';
+import 'package:my_template/core/errors/failures.dart';
 import 'package:my_template/domain/repositories/auth_repository.dart';
 
 import '../../domain/entities/user.dart';
@@ -24,7 +25,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       );
 
   @override
-  Future<Either<String, User>> signUp(
+  Future<Either<Failure, User>> signUp(
       {required String email, required String password}) async {
     try {
       final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
@@ -34,12 +35,12 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       return right(User(
           id: userCredential.user!.uid, email: userCredential.user!.email!));
     } on firebase.FirebaseAuthException catch (e) {
-      return left(e.message ?? "Unknown error");
+      return left(Failure.authenticationError(errorMessage: e.message));
     }
   }
 
   @override
-  Future<Either<String, User>> signIn(
+  Future<Either<Failure, User>> signIn(
       {required String email, required String password}) async {
     try {
       final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
@@ -49,7 +50,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       return right(User(
           id: userCredential.user!.uid, email: userCredential.user!.email!));
     } on firebase.FirebaseAuthException catch (e) {
-      return left(e.message ?? "Unknown error");
+      return left(Failure.authenticationError(errorMessage: e.message));
     }
   }
 

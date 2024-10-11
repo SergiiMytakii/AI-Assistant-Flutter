@@ -1,13 +1,14 @@
 import 'package:dartz/dartz.dart';
+import 'package:my_template/core/errors/failures.dart';
 import '../entities/user.dart';
 
 abstract class AuthenticationRepository {
   Future<User?> get user;
 
-  Future<Either<String, User>> signUp(
+  Future<Either<Failure, User>> signUp(
       {required String email, required String password});
 
-  Future<Either<String, User>> signIn(
+  Future<Either<Failure, User>> signIn(
       {required String email, required String password});
 
   Future<void> signOut();

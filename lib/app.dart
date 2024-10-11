@@ -6,6 +6,7 @@ import 'package:my_template/core/router/app_router.dart';
 import 'package:my_template/injection.dart';
 import 'package:my_template/presentation/bloc/bloc/auth_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:my_template/theme.dart';
 
 import 'flavors.dart';
 
@@ -23,9 +24,9 @@ class App extends StatelessWidget {
       fallbackLocale: const Locale('en', 'US'),
       child: MaterialApp(
         title: F.title,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.system,
         home: _flavorBanner(
           child: BlocProvider(
             create: (context) => getIt<AuthenticationBloc>(),
