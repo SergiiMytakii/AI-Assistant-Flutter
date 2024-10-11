@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_template/core/constants/constants.dart';
-import 'package:my_template/injection.dart';
-import 'package:my_template/presentation/bloc/bloc/auth_bloc.dart';
-import 'package:my_template/presentation/screens/widget/alert_dialog.dart';
-import 'package:my_template/presentation/screens/widget/my_text_button.dart';
-import 'package:my_template/presentation/screens/widget/my_text_field.dart';
+import 'package:ai_assiatant_flutter/core/constants/constants.dart';
+import 'package:ai_assiatant_flutter/injection.dart';
+import 'package:ai_assiatant_flutter/presentation/bloc/bloc/auth_bloc.dart';
+import 'package:ai_assiatant_flutter/presentation/screens/widget/alert_dialog.dart';
+import 'package:ai_assiatant_flutter/presentation/screens/widget/my_text_button.dart';
+import 'package:ai_assiatant_flutter/presentation/screens/widget/my_text_field.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SignInScreen extends StatefulWidget {

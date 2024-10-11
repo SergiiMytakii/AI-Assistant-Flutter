@@ -1,6 +1,6 @@
-# my_flutter_template
+# AI Assistant with RAG
 
-A new Flutter project.
+
 
 ## Getting Started
 

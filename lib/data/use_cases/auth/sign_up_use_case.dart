@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:my_template/core/errors/failures.dart';
-import 'package:my_template/domain/entities/user.dart';
-import 'package:my_template/domain/repositories/auth_repository.dart';
+import 'package:ai_assiatant_flutter/core/errors/failures.dart';
+import 'package:ai_assiatant_flutter/domain/entities/user.dart';
+import 'package:ai_assiatant_flutter/domain/repositories/auth_repository.dart';
 
 @injectable
 class SignUpUseCase {

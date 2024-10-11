@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:my_template/domain/repositories/auth_repository.dart';
+import 'package:ai_assiatant_flutter/domain/repositories/auth_repository.dart';
 
 @injectable
 class SignOutUseCase {

@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
-import 'package:my_template/domain/data_sources/firebase_data_source.dart';
-import 'package:my_template/domain/entities/user.dart';
+import 'package:ai_assiatant_flutter/domain/data_sources/firebase_data_source.dart';
+import 'package:ai_assiatant_flutter/domain/entities/user.dart';
 
 @dev
 @prod

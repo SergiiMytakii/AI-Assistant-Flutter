@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:go_router/go_router.dart';
-import 'package:my_template/injection.dart';
-import 'package:my_template/presentation/bloc/bloc/auth_bloc.dart';
+import 'package:ai_assiatant_flutter/injection.dart';
+import 'package:ai_assiatant_flutter/presentation/bloc/bloc/auth_bloc.dart';
 
 class RootScreen extends StatefulWidget {
   final Widget? child;

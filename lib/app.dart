@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_template/core/constants/constants.dart';
-import 'package:my_template/core/router/app_router.dart';
-import 'package:my_template/injection.dart';
-import 'package:my_template/presentation/bloc/bloc/auth_bloc.dart';
+import 'package:ai_assiatant_flutter/core/constants/constants.dart';
+import 'package:ai_assiatant_flutter/core/router/app_router.dart';
+import 'package:ai_assiatant_flutter/injection.dart';
+import 'package:ai_assiatant_flutter/presentation/bloc/bloc/auth_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:my_template/theme.dart';
+import 'package:ai_assiatant_flutter/theme.dart';
 
 import 'flavors.dart';
 

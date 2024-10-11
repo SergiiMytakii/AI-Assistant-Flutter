@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:my_template/core/constants/constants.dart';
-import 'package:my_template/main.dart';
+import 'package:ai_assiatant_flutter/core/constants/constants.dart';
+import 'package:ai_assiatant_flutter/main.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});

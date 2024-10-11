@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:my_template/core/errors/failures.dart';
+import 'package:ai_assiatant_flutter/core/errors/failures.dart';
 import '../entities/user.dart';
 
 abstract class AuthenticationRepository {

@@ -10,21 +10,24 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
-import 'package:my_template/data/data_sources/firebase_data_source_impl.dart'
+import 'package:ai_assiatant_flutter/data/data_sources/firebase_data_source_impl.dart'
     as _i529;
-import 'package:my_template/data/repositories/auth_repository_impl.dart'
+import 'package:ai_assiatant_flutter/data/repositories/auth_repository_impl.dart'
     as _i1021;
-import 'package:my_template/data/use_cases/auth/sign_in_use_case.dart' as _i739;
-import 'package:my_template/data/use_cases/auth/sign_out_use_case.dart'
+import 'package:ai_assiatant_flutter/data/use_cases/auth/sign_in_use_case.dart'
+    as _i739;
+import 'package:ai_assiatant_flutter/data/use_cases/auth/sign_out_use_case.dart'
     as _i313;
-import 'package:my_template/data/use_cases/auth/sign_up_use_case.dart'
+import 'package:ai_assiatant_flutter/data/use_cases/auth/sign_up_use_case.dart'
     as _i1045;
-import 'package:my_template/data/use_cases/auth/user_stream_use_case.dart'
+import 'package:ai_assiatant_flutter/data/use_cases/auth/user_stream_use_case.dart'
     as _i65;
-import 'package:my_template/domain/data_sources/firebase_data_source.dart'
+import 'package:ai_assiatant_flutter/domain/data_sources/firebase_data_source.dart'
     as _i287;
-import 'package:my_template/domain/repositories/auth_repository.dart' as _i741;
-import 'package:my_template/presentation/bloc/bloc/auth_bloc.dart' as _i455;
+import 'package:ai_assiatant_flutter/domain/repositories/auth_repository.dart'
+    as _i741;
+import 'package:ai_assiatant_flutter/presentation/bloc/bloc/auth_bloc.dart'
+    as _i455;
 
 const String _dev = 'dev';
 const String _prod = 'prod';

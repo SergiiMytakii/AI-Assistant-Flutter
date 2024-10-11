@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:my_template/data/use_cases/auth/sign_in_use_case.dart';
-import 'package:my_template/data/use_cases/auth/sign_out_use_case.dart';
-import 'package:my_template/data/use_cases/auth/sign_up_use_case.dart';
-import 'package:my_template/data/use_cases/auth/user_stream_use_case.dart';
-import 'package:my_template/domain/entities/user.dart';
+import 'package:ai_assiatant_flutter/data/use_cases/auth/sign_in_use_case.dart';
+import 'package:ai_assiatant_flutter/data/use_cases/auth/sign_out_use_case.dart';
+import 'package:ai_assiatant_flutter/data/use_cases/auth/sign_up_use_case.dart';
+import 'package:ai_assiatant_flutter/data/use_cases/auth/user_stream_use_case.dart';
+import 'package:ai_assiatant_flutter/domain/entities/user.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 part 'auth_bloc.freezed.dart';

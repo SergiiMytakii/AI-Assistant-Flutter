@@ -3,14 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:my_template/domain/entities/user.dart';
-import 'package:my_template/injection.dart';
-import 'package:my_template/presentation/bloc/bloc/auth_bloc.dart';
-import 'package:my_template/presentation/screens/home_screen.dart';
-import 'package:my_template/presentation/screens/root_screen.dart';
-import 'package:my_template/presentation/screens/settings_screen.dart';
-import 'package:my_template/presentation/screens/sign_in_screen.dart';
-import 'package:my_template/presentation/screens/some_screen.dart';
+import 'package:ai_assiatant_flutter/domain/entities/user.dart';
+import 'package:ai_assiatant_flutter/injection.dart';
+import 'package:ai_assiatant_flutter/presentation/bloc/bloc/auth_bloc.dart';
+import 'package:ai_assiatant_flutter/presentation/screens/home_screen.dart';
+import 'package:ai_assiatant_flutter/presentation/screens/root_screen.dart';
+import 'package:ai_assiatant_flutter/presentation/screens/settings_screen.dart';
+import 'package:ai_assiatant_flutter/presentation/screens/sign_in_screen.dart';
+import 'package:ai_assiatant_flutter/presentation/screens/some_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');

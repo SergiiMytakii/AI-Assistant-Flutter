@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:my_template/flavors.dart';
+import 'package:ai_assiatant_flutter/flavors.dart';
 
 part 'failures.freezed.dart';
 
