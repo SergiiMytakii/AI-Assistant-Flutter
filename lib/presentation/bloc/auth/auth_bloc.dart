@@ -5,7 +5,7 @@ import 'package:ai_assiatant_flutter/data/use_cases/auth/sign_in_use_case.dart';
 import 'package:ai_assiatant_flutter/data/use_cases/auth/sign_out_use_case.dart';
 import 'package:ai_assiatant_flutter/data/use_cases/auth/sign_up_use_case.dart';
 import 'package:ai_assiatant_flutter/data/use_cases/auth/user_stream_use_case.dart';
-import 'package:ai_assiatant_flutter/domain/entities/user.dart';
+import 'package:ai_assiatant_flutter/domain/entities/user/user.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 part 'auth_bloc.freezed.dart';
@@ -17,6 +17,7 @@ class AuthenticationBloc
   final SignUpUseCase _signUpUseCase;
   final SignOutUseCase _signOutUseCase;
   final UserStreamUseCase _userStreamUseCase;
+  User? user;
 
   AuthenticationBloc(
     this._signInUseCase,
@@ -36,6 +37,7 @@ class AuthenticationBloc
 
     final user = await _userStreamUseCase();
     if (user != null) {
+      this.user = user;
       emit(AuthenticationState.authenticated(user));
     } else {
       emit(const AuthenticationState.unauthenticated());
@@ -45,7 +47,7 @@ class AuthenticationBloc
   Future<void> _onSignOutRequested(AuthenticationSignOutRequested event,
       Emitter<AuthenticationState> emit) async {
     emit(const AuthenticationState.loading());
-
+    user = null;
     await _signOutUseCase();
     emit(const AuthenticationState.unauthenticated());
   }
@@ -59,7 +61,10 @@ class AuthenticationBloc
     result.fold(
       (failure) =>
           emit(AuthenticationState.error(failure.toUserFriendlyMessage())),
-      (user) => emit(AuthenticationState.authenticated(user)),
+      (user) {
+        this.user = user;
+        emit(AuthenticationState.authenticated(user));
+      },
     );
   }
 
@@ -72,7 +77,10 @@ class AuthenticationBloc
     result.fold(
       (failure) =>
           emit(AuthenticationState.error(failure.toUserFriendlyMessage())),
-      (user) => emit(AuthenticationState.authenticated(user)),
+      (user) {
+        this.user = user;
+        emit(AuthenticationState.authenticated(user));
+      },
     );
   }
 }

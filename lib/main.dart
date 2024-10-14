@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ai_assiatant_flutter/core/constants/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -17,13 +18,14 @@ import 'firebase_config_dev.dart' as dev_config;
 import 'firebase_config_prod.dart' as prod_config;
 
 late SharedPreferences prefs;
+final logger = Logger();
+final isProdMode = F.appFlavor == Flavor.prod;
 void main() async {
   runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       await EasyLocalization.ensureInitialized();
-      final isProdMode = F.appFlavor == Flavor.prod;
-      _activateCrashlitics(isProdMode);
+      _activateCrashlitics();
 
       final firebaseConfig =
           isProdMode ? prod_config.firebaseConfig : dev_config.firebaseConfig;
@@ -49,21 +51,30 @@ void main() async {
       prefs = await SharedPreferences.getInstance();
       FirebaseAnalytics.instance
           .logAppOpen(callOptions: AnalyticsCallOptions(global: true));
-      runApp(const App());
+      runApp(EasyLocalization(
+          useOnlyLangCode: true,
+          supportedLocales: languagesCodes.keys
+              .map((languageCode) => Locale(languageCode))
+              .toList(),
+          path: 'assets/translations',
+          fallbackLocale: const Locale('en', 'US'),
+          child: const App()));
     },
     (error, stackTrace) {
       if (kDebugMode) {
         print('Error: $error');
         print('StackTrace: $stackTrace');
       }
-      FirebaseCrashlytics.instance
-          .recordError(error, stackTrace, printDetails: true);
+      logger.e(error, stackTrace: stackTrace);
+      if (isProdMode) {
+        FirebaseCrashlytics.instance
+            .recordError(error, stackTrace, printDetails: true);
+      }
     },
   );
 }
 
-void _activateCrashlitics(bool isProdMode) {
-  final logger = Logger();
+void _activateCrashlitics() {
   FlutterError.onError = (errorDetails) {
     logger.e(errorDetails);
     if (isProdMode) {
@@ -72,7 +83,7 @@ void _activateCrashlitics(bool isProdMode) {
   };
   // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
   PlatformDispatcher.instance.onError = (error, stack) {
-    logger.e(error);
+    logger.e(error, stackTrace: stack);
     if (isProdMode) {
       FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:go_router/go_router.dart';
 import 'package:ai_assiatant_flutter/injection.dart';
-import 'package:ai_assiatant_flutter/presentation/bloc/bloc/auth_bloc.dart';
+import 'package:ai_assiatant_flutter/presentation/bloc/auth/auth_bloc.dart';
 
 class RootScreen extends StatefulWidget {
   final Widget? child;
@@ -47,7 +47,7 @@ class _RootScreenState extends State<RootScreen> {
                           context.go('/');
                           break;
                         case 1:
-                          context.go('/somescreen');
+                          context.go('/chatscreen');
                           break;
                         case 2:
                           context.go('/settings');
@@ -61,7 +61,7 @@ class _RootScreenState extends State<RootScreen> {
                       ),
                       NavigationRailDestination(
                         icon: const Icon(Icons.notifications),
-                        label: Text('Some Screen'.tr()),
+                        label: Text('Chat'.tr()),
                       ),
                       NavigationRailDestination(
                         icon: const Icon(Icons.settings),
@@ -102,7 +102,7 @@ class _RootScreenState extends State<RootScreen> {
               context.go('/');
               break;
             case 1:
-              context.go('/somescreen');
+              context.go('/chatscreen');
               break;
             case 2:
               context.go('/settings');
@@ -115,8 +115,8 @@ class _RootScreenState extends State<RootScreen> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Some Screen',
+            icon: Icon(Icons.chat),
+            label: 'Chat',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),

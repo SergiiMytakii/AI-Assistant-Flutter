@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "My Template App (dev)",
+            "name": "AI Assistant (dev)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug",
@@ -17,7 +17,7 @@
             ]
         },
         {
-            "name": "My Template App (prod)",
+            "name": "AI Assistant (prod)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug",
@@ -29,7 +29,7 @@
             ]
         },
         {
-            "name": "My Template App (release mode)",
+            "name": "AI Assistant (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release",
@@ -42,7 +42,7 @@
         }
         ,
         {
-            "name": "My Template App (web dev)",
+            "name": "AI Assistant (web dev)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug",
@@ -58,7 +58,7 @@
             ]
         },
         {
-            "name": "My Template App (web prod)",
+            "name": "AI Assistant (web prod)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug",

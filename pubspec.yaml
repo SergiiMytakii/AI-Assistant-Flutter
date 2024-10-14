@@ -35,6 +35,10 @@ dependencies:
   json_annotation: ^4.9.0
   shared_preferences: any
   url_launcher: any
+  file_picker: any
+  path_provider: any
+  csv: any
+  langchain_ollama: ^0.3.2+1
 
   #web
   flutter_web_plugins:
