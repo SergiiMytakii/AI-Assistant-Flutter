@@ -6,3 +6,4 @@
 
 $ dart run build_runner watch --delete-conflicting-outputs
 $ dart run flutter_flavorizr
+

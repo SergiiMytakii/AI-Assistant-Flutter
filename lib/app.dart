@@ -1,10 +1,7 @@
+import 'package:ai_assiatant_flutter/presentation/bloc/my_multibloc_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ai_assiatant_flutter/core/constants/constants.dart';
 import 'package:ai_assiatant_flutter/core/router/app_router.dart';
-import 'package:ai_assiatant_flutter/injection.dart';
-import 'package:ai_assiatant_flutter/presentation/bloc/bloc/auth_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ai_assiatant_flutter/theme.dart';
 
@@ -15,27 +12,21 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return EasyLocalization(
-      useOnlyLangCode: true,
-      supportedLocales: languagesCodes.keys
-          .map((languageCode) => Locale(languageCode))
-          .toList(),
-      path: 'assets/translations',
-      fallbackLocale: const Locale('en', 'US'),
-      child: MaterialApp(
-        title: F.title,
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        themeMode: ThemeMode.system,
-        home: _flavorBanner(
-          child: BlocProvider(
-            create: (context) => getIt<AuthenticationBloc>(),
-            child: MaterialApp.router(
-              routerConfig: router,
-            ),
+    return MaterialApp(
+      home: _flavorBanner(
+        child: MyMultiblocProvider(
+          child: MaterialApp.router(
+            routerConfig: router,
+            title: F.title,
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: ThemeMode.system,
+            locale: context.locale,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
           ),
-          show: kDebugMode,
         ),
+        show: kDebugMode,
       ),
     );
   }

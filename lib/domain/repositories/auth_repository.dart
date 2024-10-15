@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ai_assiatant_flutter/core/errors/failures.dart';
-import '../entities/user.dart';
+import '../entities/user/user.dart';
 
 abstract class AuthenticationRepository {
   Future<User?> get user;

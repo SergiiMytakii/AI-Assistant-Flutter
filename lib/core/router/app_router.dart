@@ -3,14 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ai_assiatant_flutter/domain/entities/user.dart';
+import 'package:ai_assiatant_flutter/domain/entities/user/user.dart';
 import 'package:ai_assiatant_flutter/injection.dart';
-import 'package:ai_assiatant_flutter/presentation/bloc/bloc/auth_bloc.dart';
+import 'package:ai_assiatant_flutter/presentation/bloc/auth/auth_bloc.dart';
 import 'package:ai_assiatant_flutter/presentation/screens/home_screen.dart';
 import 'package:ai_assiatant_flutter/presentation/screens/root_screen.dart';
 import 'package:ai_assiatant_flutter/presentation/screens/settings_screen.dart';
 import 'package:ai_assiatant_flutter/presentation/screens/sign_in_screen.dart';
-import 'package:ai_assiatant_flutter/presentation/screens/some_screen.dart';
+import 'package:ai_assiatant_flutter/presentation/screens/chat/chat_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -60,11 +60,11 @@ final GoRouter router = GoRouter(
           },
         ),
         GoRoute(
-          path: '/somescreen',
+          path: '/chatscreen',
           pageBuilder: (BuildContext context, GoRouterState state) {
             return NoTransitionPage<void>(
               key: state.pageKey,
-              child: const SomeScreen(),
+              child: const ChatScreen(),
             );
           },
         ),

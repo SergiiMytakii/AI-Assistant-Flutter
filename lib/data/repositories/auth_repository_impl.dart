@@ -1,20 +1,23 @@
 import 'dart:async';
 
+import 'package:ai_assiatant_flutter/core/constants/constants.dart';
+import 'package:ai_assiatant_flutter/domain/data_sources/firebase_data_source.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:injectable/injectable.dart';
 import 'package:ai_assiatant_flutter/core/errors/failures.dart';
 import 'package:ai_assiatant_flutter/domain/repositories/auth_repository.dart';
 
-import '../../domain/entities/user.dart';
+import '../../domain/entities/user/user.dart';
 
 @dev
 @prod
 @Injectable(as: AuthenticationRepository)
 class AuthenticationRepositoryImpl implements AuthenticationRepository {
+  final FirebaseDataSource _firebaseDataSource;
   final firebase.FirebaseAuth _firebaseAuth;
 
-  AuthenticationRepositoryImpl()
+  AuthenticationRepositoryImpl(this._firebaseDataSource)
       : _firebaseAuth = firebase.FirebaseAuth.instance;
 
   @override
@@ -32,6 +35,14 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
         email: email,
         password: password,
       );
+      _firebaseDataSource.postToFirebaseDB(
+          collectionName: FirebaseCollections.users.name,
+          data: {
+            'email': userCredential.user!.email!,
+            'id': userCredential.user!.uid,
+            'createdAt': DateTime.now().toIso8601String()
+          });
+
       return right(User(
           id: userCredential.user!.uid, email: userCredential.user!.email!));
     } on firebase.FirebaseAuthException catch (e) {

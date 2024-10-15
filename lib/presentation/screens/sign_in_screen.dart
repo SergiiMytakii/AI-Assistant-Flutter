@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ai_assiatant_flutter/core/constants/constants.dart';
 import 'package:ai_assiatant_flutter/injection.dart';
-import 'package:ai_assiatant_flutter/presentation/bloc/bloc/auth_bloc.dart';
+import 'package:ai_assiatant_flutter/presentation/bloc/auth/auth_bloc.dart';
 import 'package:ai_assiatant_flutter/presentation/screens/widget/alert_dialog.dart';
 import 'package:ai_assiatant_flutter/presentation/screens/widget/my_text_button.dart';
 import 'package:ai_assiatant_flutter/presentation/screens/widget/my_text_field.dart';
