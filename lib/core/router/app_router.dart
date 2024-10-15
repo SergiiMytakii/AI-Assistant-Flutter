@@ -10,7 +10,7 @@ import 'package:ai_assiatant_flutter/presentation/screens/home_screen.dart';
 import 'package:ai_assiatant_flutter/presentation/screens/root_screen.dart';
 import 'package:ai_assiatant_flutter/presentation/screens/settings_screen.dart';
 import 'package:ai_assiatant_flutter/presentation/screens/sign_in_screen.dart';
-import 'package:ai_assiatant_flutter/presentation/screens/chat_screen.dart';
+import 'package:ai_assiatant_flutter/presentation/screens/chat/chat_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');

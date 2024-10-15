@@ -1,29 +1,28 @@
 import 'dart:typed_data';
 
 import 'package:ai_assiatant_flutter/core/utils/csv_to_map.dart';
-import 'package:ai_assiatant_flutter/domain/entities/qAndA/q_and_a.dart';
+import 'package:ai_assiatant_flutter/domain/data_sources/supabase_data_source.dart';
 import 'package:ai_assiatant_flutter/domain/repositories/docs_repository.dart';
 import 'package:ai_assiatant_flutter/injection.dart';
 import 'package:ai_assiatant_flutter/presentation/bloc/auth/auth_bloc.dart';
 import 'package:ai_assiatant_flutter/presentation/bloc/docs/docs_state.dart';
+import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:langchain/langchain.dart';
-import 'package:langchain_community/langchain_community.dart';
-import 'package:langchain_ollama/langchain_ollama.dart';
-import 'package:path_provider/path_provider.dart';
-// ignore: depend_on_referenced_packages
-import 'package:path/path.dart';
 
 @singleton
 class DocsCubit extends Cubit<DocsCubitState> {
   final DocsRepository docsRepository;
+  final SupabaseDataSource supabaseDataSource;
 
-  DocsCubit(this.docsRepository) : super(const DocsCubitState());
+  DocsCubit(this.docsRepository, this.supabaseDataSource)
+      : super(const DocsCubitState());
   List<Map<String, dynamic>> csvData = [];
   String fileName = '';
+
   Future<void> pickAndUploadFile() async {
     try {
       emit(state.copyWith(isLoading: true));
@@ -47,6 +46,7 @@ class DocsCubit extends Cubit<DocsCubitState> {
           {
             await docsRepository.uploadDocument(
                 fileName: fileName, data: csvData, documentRef: userId);
+            loadToVectorStore(csvData);
 
             emit(state.copyWith(uploadedFile: fileName, isLoading: false));
           }
@@ -100,10 +100,12 @@ class DocsCubit extends Cubit<DocsCubitState> {
           errorMessage: failure.toUserFriendlyMessage(),
           isLoading: false,
         )),
-        (document) => emit(state.copyWith(
-          uploadedFile: document.fileName,
-          isLoading: false,
-        )),
+        (document) {
+          emit(state.copyWith(
+            uploadedFile: document.fileName,
+            isLoading: false,
+          ));
+        },
       );
     } catch (e) {
       emit(state.copyWith(
@@ -113,17 +115,11 @@ class DocsCubit extends Cubit<DocsCubitState> {
     }
   }
 
-  Future<void> loadToVectorStore() async {
-    final embeddings =
-        OllamaEmbeddings(model: 'jina/jina-embeddings-v2-small-en');
-
-    final vectorStore = ObjectBoxVectorStore(
-      embeddings: embeddings,
-      dimensions: 512,
-    );
-    final res = await vectorStore.addDocuments(
-      documents:
-          csvData.map((e) => Document(pageContent: e.toString())).toList(),
+  Future<void> loadToVectorStore(List<Map<String, dynamic>> data) async {
+    final supabase = await supabaseDataSource.supabaseInstance;
+    await supabase.from('documents').delete().neq('id', '-1');
+    await supabaseDataSource.supabaseVectorStore.addDocuments(
+      documents: data.map((e) => Document(pageContent: e.toString())).toList(),
     );
   }
 }

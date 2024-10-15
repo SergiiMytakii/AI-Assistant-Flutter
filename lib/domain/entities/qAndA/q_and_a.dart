@@ -5,9 +5,9 @@ part 'q_and_a.g.dart';
 
 @freezed
 class QandAdocument with _$QandAdocument {
-  @JsonSerializable(explicitToJson: true)
+  // @JsonSerializable(explicitToJson: true)
   const factory QandAdocument({
-    required List<QandA> doc,
+    required List<Map<String, dynamic>> doc,
     required String fileName,
   }) = _QandAdocument;
 

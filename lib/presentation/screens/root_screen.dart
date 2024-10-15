@@ -60,7 +60,7 @@ class _RootScreenState extends State<RootScreen> {
                         label: Text('Home'.tr()),
                       ),
                       NavigationRailDestination(
-                        icon: const Icon(Icons.notifications),
+                        icon: const Icon(Icons.chat),
                         label: Text('Chat'.tr()),
                       ),
                       NavigationRailDestination(
