@@ -1,4 +1,5 @@
 import 'package:ai_assiatant_flutter/domain/entities/chat/chat_entity.dart';
+import 'package:ai_assiatant_flutter/main.dart';
 import 'package:flutter/material.dart';
 import 'package:full_screen_image/full_screen_image.dart';
 
@@ -12,17 +13,20 @@ class ImageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: message.imageUrls!
           .map((imageUrl) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(16)),
-                  child: Container(
-                      width: MediaQuery.of(context).size.width * 0.7,
-                      height: MediaQuery.of(context).size.width * 0.7,
-                      color: Colors.grey[300],
-                      child: fullScreenHeroWidget(imageUrl)),
-                ),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                child: ConstrainedBox(
+                    constraints: const BoxConstraints(
+                        maxHeight: 300,
+                        maxWidth: 300,
+                        minWidth: 150,
+                        minHeight: 150),
+                    child: fullScreenHeroWidget(imageUrl)),
               ))
           .toList(),
     );
@@ -31,10 +35,10 @@ class ImageCard extends StatelessWidget {
   Widget fullScreenHeroWidget(String imageUrl) => FullScreenWidget(
         disposeLevel: DisposeLevel.Low,
         child: Hero(
-          tag: "customTag",
+          tag: imageUrl,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: Image.asset(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.network(
               imageUrl,
               fit: BoxFit.cover,
             ),

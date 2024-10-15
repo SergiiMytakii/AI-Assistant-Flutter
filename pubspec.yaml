@@ -42,6 +42,7 @@ dependencies:
   full_screen_image: any
   supabase_flutter: ^2.8.0
 
+
   #web
   flutter_web_plugins:
     sdk: flutter
@@ -53,6 +54,8 @@ dependencies:
 
   cupertino_icons: ^1.0.6
   freezed_annotation: ^2.4.4
+  youtube_player_iframe: ^5.0.0
+  wakelock_plus: ^1.2.8
 
 dev_dependencies:
   build_runner: any
