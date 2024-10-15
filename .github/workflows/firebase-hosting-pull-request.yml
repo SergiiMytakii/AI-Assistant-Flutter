@@ -13,7 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: 'dart pub get, flutter run'
+      - run: flutter pub get # Install dependencies
+      - run: flutter build web --dart-define=openAIKey=${{ secrets.openAIKey }} --dart-define=supabaseKey=${{ secrets.supabaseKey }}--web-renderer html
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
