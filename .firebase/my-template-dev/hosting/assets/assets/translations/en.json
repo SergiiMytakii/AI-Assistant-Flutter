@@ -1,0 +1,24 @@
+{
+    "Home": "Home",
+    "Settings": "Settings",
+    "Logout": "Logout",
+    "Login": "Login",
+    "Signup": "Signup",
+    "Language": "Language",
+    "en": "English",
+    "et": "Estonian",
+    "fr": "French",
+    "de": "German",
+    "bg": "Bulgarian",
+    "it": "Italian",
+    "lv": "Latvian",
+    "lt": "Lithuanian",
+    "no": "Norwegian",
+    "pl": "Polish",
+    "ro": "Romanian",
+    "ru": "Russian",
+    "es": "Spanish",
+    "sv": "Swedish",
+    "uk": "Ukrainian"
+    
+}
