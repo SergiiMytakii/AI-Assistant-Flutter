@@ -6,10 +6,10 @@ import 'package:go_router/go_router.dart';
 import 'package:ai_assiatant_flutter/domain/entities/user/user.dart';
 import 'package:ai_assiatant_flutter/injection.dart';
 import 'package:ai_assiatant_flutter/presentation/bloc/auth/auth_bloc.dart';
-import 'package:ai_assiatant_flutter/presentation/screens/home_screen.dart';
-import 'package:ai_assiatant_flutter/presentation/screens/root_screen.dart';
-import 'package:ai_assiatant_flutter/presentation/screens/settings_screen.dart';
-import 'package:ai_assiatant_flutter/presentation/screens/sign_in_screen.dart';
+import 'package:ai_assiatant_flutter/presentation/screens/home/home_screen.dart';
+import 'package:ai_assiatant_flutter/presentation/screens/root/root_screen.dart';
+import 'package:ai_assiatant_flutter/presentation/screens/settings/settings_screen.dart';
+import 'package:ai_assiatant_flutter/presentation/screens/signin/sign_in_screen.dart';
 import 'package:ai_assiatant_flutter/presentation/screens/chat/chat_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =

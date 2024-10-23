@@ -1,9 +1,20 @@
+import 'dart:ui';
+
 import 'package:ai_assiatant_flutter/injection.dart';
+import 'package:ai_assiatant_flutter/presentation/bloc/auth/auth_bloc.dart';
 import 'package:ai_assiatant_flutter/presentation/bloc/docs/docs_cubit.dart';
 import 'package:ai_assiatant_flutter/presentation/bloc/docs/docs_state.dart';
+import 'package:ai_assiatant_flutter/presentation/screens/widget/alert_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'dart:html' as html;
+
+final qrKey = GlobalKey();
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -64,6 +75,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ],
                             ),
+                            RepaintBoundary(
+                              key: qrKey,
+                              child: QrImageView(
+                                backgroundColor: Colors.white,
+                                data:
+                                    'http://localhost:52361/${getIt<AuthenticationBloc>().user?.id}',
+                                version: QrVersions.auto,
+                                size: 200.0,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            ElevatedButton(
+                              onPressed: () => _downloadImage(),
+                              child: Text('Download QR Code'.tr()),
+                            ),
                           ],
                         ),
                       )
@@ -74,5 +100,48 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  _downloadImage() async {
+    try {
+      final qrValidationResult = QrValidator.validate(
+        data: 'http://localhost:52361/${getIt<AuthenticationBloc>().user?.id}',
+        version: QrVersions.auto,
+        errorCorrectionLevel: QrErrorCorrectLevel.L,
+      );
+
+      if (qrValidationResult.status == QrValidationStatus.valid) {
+        final boundary =
+            qrKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+        final image = await boundary.toImage();
+        final byteData = await image.toByteData(format: ImageByteFormat.png);
+        final pngBytes = byteData!.buffer.asUint8List();
+
+        // Save the image to the device
+        if (kIsWeb) {
+          final blob = html.Blob([pngBytes]);
+          final url = html.Url.createObjectUrlFromBlob(blob);
+          html.AnchorElement(href: url)
+            ..setAttribute("download", "qr_code.png")
+            ..click();
+          html.Url.revokeObjectUrl(url);
+        } else {
+          final result = await ImageGallerySaver.saveImage(pngBytes,
+              quality: 100, name: "qr_code");
+
+          if (result['isSuccess']) {
+            if (mounted) {
+              showAlertDialog(context, 'QR Code saved'.tr());
+            }
+          }
+        }
+      } else {
+        showAlertDialog(context, 'Failed to save QR Code'.tr());
+      }
+    } catch (e) {
+      if (mounted) {
+        showAlertDialog(context, '${'Error:'.tr()} $e');
+      }
+    }
   }
 }

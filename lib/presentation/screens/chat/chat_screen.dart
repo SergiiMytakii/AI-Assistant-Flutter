@@ -70,7 +70,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 'https://firebasestorage.googleapis.com/v0/b/ai-consultant-4137b.appspot.com/o/images%2FIMG_7388.jpg?alt=media&token=0d72bfbf-6e7b-46dd-b550-fe35ed56b3fb'
                               ],
                                   videoUrls: [
-                                'https://youtube.com/shorts/EhCpNm5vla0?si=Qg5cG6hMKrFX9fu5'
+                                'https://www.youtube.com/watch?v=oMFhQD7DztM&list=PLw6SJ6q6-1YpD_mAuJTfyFveCD5x5sEXW&index=14'
                               ]);
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
