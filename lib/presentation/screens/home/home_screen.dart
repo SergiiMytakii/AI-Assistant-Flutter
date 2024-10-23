@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:ai_assiatant_flutter/core/constants/constants.dart';
 import 'package:ai_assiatant_flutter/injection.dart';
 import 'package:ai_assiatant_flutter/presentation/bloc/auth/auth_bloc.dart';
 import 'package:ai_assiatant_flutter/presentation/bloc/docs/docs_cubit.dart';
@@ -24,6 +25,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final url = '$domainUrl/${getIt<AuthenticationBloc>().user?.id}';
   @override
   void initState() {
     getIt<DocsCubit>().fetchDocument();
@@ -62,10 +64,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 16),
-                            Text('Uploaded file:'.tr()),
-                            const SizedBox(height: 16),
                             Row(
                               children: [
+                                Text('Uploaded file:'.tr()),
+                                const SizedBox(width: 16),
                                 Text(state.uploadedFile!),
                                 const SizedBox(width: 16),
                                 IconButton(
@@ -79,8 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               key: qrKey,
                               child: QrImageView(
                                 backgroundColor: Colors.white,
-                                data:
-                                    'http://localhost:52361/${getIt<AuthenticationBloc>().user?.id}',
+                                data: url,
                                 version: QrVersions.auto,
                                 size: 200.0,
                               ),
@@ -90,6 +91,24 @@ class _HomeScreenState extends State<HomeScreen> {
                               onPressed: () => _downloadImage(),
                               child: Text('Download QR Code'.tr()),
                             ),
+                            const SizedBox(height: 16),
+                            Row(
+                              children: [
+                                Text('Your chatbot URL:'.tr()),
+                                const SizedBox(width: 16),
+                                Text(url),
+                                const SizedBox(width: 16),
+                                IconButton(
+                                  icon: const Icon(Icons.copy),
+                                  onPressed: () {
+                                    html.window.navigator.clipboard
+                                        ?.writeText(url);
+                                    showAlertDialog(
+                                        context, 'Copied to clipboard'.tr());
+                                  },
+                                ),
+                              ],
+                            )
                           ],
                         ),
                       )
@@ -105,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
   _downloadImage() async {
     try {
       final qrValidationResult = QrValidator.validate(
-        data: 'http://localhost:52361/${getIt<AuthenticationBloc>().user?.id}',
+        data: url,
         version: QrVersions.auto,
         errorCorrectionLevel: QrErrorCorrectLevel.L,
       );

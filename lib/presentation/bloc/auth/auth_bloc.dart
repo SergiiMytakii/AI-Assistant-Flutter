@@ -1,3 +1,4 @@
+import 'package:ai_assiatant_flutter/data/use_cases/auth/sign_in_by_uuid_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -17,6 +18,7 @@ class AuthenticationBloc
   final SignUpUseCase _signUpUseCase;
   final SignOutUseCase _signOutUseCase;
   final UserStreamUseCase _userStreamUseCase;
+  final SignInByUuidUseCase _signInByUuidUseCase;
   User? user;
 
   AuthenticationBloc(
@@ -24,11 +26,13 @@ class AuthenticationBloc
     this._signUpUseCase,
     this._signOutUseCase,
     this._userStreamUseCase,
+    this._signInByUuidUseCase,
   ) : super(const AuthenticationState.initial()) {
     on<CheckAuthenticationStatus>(_onCheckStatus);
     on<AuthenticationSignOutRequested>(_onSignOutRequested);
     on<AuthenticationSignInRequested>(_onSignInRequested);
     on<AuthenticationSignUpRequested>(_onSignUpRequested);
+    on<AuthenticateByUuid>(_onAuthenticateByUuid);
   }
 
   void _onCheckStatus(CheckAuthenticationStatus event,
@@ -77,6 +81,20 @@ class AuthenticationBloc
     result.fold(
       (failure) =>
           emit(AuthenticationState.error(failure.toUserFriendlyMessage())),
+      (user) {
+        this.user = user;
+        emit(AuthenticationState.authenticated(user));
+      },
+    );
+  }
+
+  void _onAuthenticateByUuid(
+      AuthenticateByUuid event, Emitter<AuthenticationState> emit) async {
+    emit(const AuthenticationState.loading());
+
+    final result = await _signInByUuidUseCase(uuid: event.uuid);
+    result.fold(
+      (failure) => emit(const AuthenticationState.unauthenticated()),
       (user) {
         this.user = user;
         emit(AuthenticationState.authenticated(user));

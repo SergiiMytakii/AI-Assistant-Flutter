@@ -1,4 +1,5 @@
 const String email = 'serjmitaki@gmail.com';
+const String domainUrl = 'http://localhost:52812';
 
 Map<String, String> languagesCodes = {
   'en': 'English',

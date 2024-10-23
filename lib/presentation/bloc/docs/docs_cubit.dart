@@ -4,6 +4,7 @@ import 'package:ai_assiatant_flutter/core/utils/csv_to_map.dart';
 import 'package:ai_assiatant_flutter/domain/data_sources/supabase_data_source.dart';
 import 'package:ai_assiatant_flutter/domain/repositories/docs_repository.dart';
 import 'package:ai_assiatant_flutter/injection.dart';
+import 'package:ai_assiatant_flutter/main.dart';
 import 'package:ai_assiatant_flutter/presentation/bloc/auth/auth_bloc.dart';
 import 'package:ai_assiatant_flutter/presentation/bloc/docs/docs_state.dart';
 import 'package:dartz/dartz.dart';
@@ -46,7 +47,7 @@ class DocsCubit extends Cubit<DocsCubitState> {
           {
             await docsRepository.uploadDocument(
                 fileName: fileName, data: csvData, documentRef: userId);
-            loadToVectorStore(csvData);
+            loadToVectorStore(csvData, userId);
 
             emit(state.copyWith(uploadedFile: fileName, isLoading: false));
           }
@@ -115,11 +116,32 @@ class DocsCubit extends Cubit<DocsCubitState> {
     }
   }
 
-  Future<void> loadToVectorStore(List<Map<String, dynamic>> data) async {
-    final supabase = await supabaseDataSource.supabaseInstance;
-    await supabase.from('documents').delete().neq('id', '-1');
-    await supabaseDataSource.supabaseVectorStore.addDocuments(
-      documents: data.map((e) => Document(pageContent: e.toString())).toList(),
-    );
+  Future<void> loadToVectorStore(
+      List<Map<String, dynamic>> data, String userId) async {
+    try {
+      final supabase = supabaseDataSource.supabaseInstance;
+
+      final tableName = 'documents_$userId';
+      // Check if table exists
+      final tableExists = await supabase.rpc('check_table_exists', params: {
+        'input_table_name': tableName,
+      });
+      // Create table if it doesn't exist
+      if (!tableExists) {
+        await supabase.rpc('create_documents_table', params: {
+          'input_table_name': tableName,
+        });
+      } else {
+        //clean table content
+        await supabase.from('documents_$userId').delete().neq('id', '-1');
+      }
+
+      await supabaseDataSource.supabaseVectorStore.addDocuments(
+        documents:
+            data.map((e) => Document(pageContent: e.toString())).toList(),
+      );
+    } on Exception catch (e) {
+      logger.e(e);
+    }
   }
 }

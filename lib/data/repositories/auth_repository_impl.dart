@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:ai_assiatant_flutter/core/constants/constants.dart';
 import 'package:ai_assiatant_flutter/domain/data_sources/firebase_data_source.dart';
+import 'package:ai_assiatant_flutter/main.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:injectable/injectable.dart';
@@ -23,7 +24,8 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   @override
   Future<User?> get user => _firebaseAuth.authStateChanges().first.then(
         (firebaseUser) => firebaseUser != null
-            ? User(id: firebaseUser.uid, email: firebaseUser.email!)
+            ? User(
+                id: firebaseUser.uid, email: firebaseUser.email!, isAdmin: true)
             : null,
       );
 
@@ -59,7 +61,29 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
         password: password,
       );
       return right(User(
-          id: userCredential.user!.uid, email: userCredential.user!.email!));
+          id: userCredential.user!.uid,
+          email: userCredential.user!.email!,
+          isAdmin: true));
+    } on firebase.FirebaseAuthException catch (e) {
+      return left(Failure.authenticationError(errorMessage: e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, User>> signInByUuid({required String uuid}) async {
+    try {
+      final snapshot = await _firebaseDataSource.getOneFromFirebaseDB(
+        collectionName: FirebaseCollections.users.name,
+        docReference: uuid,
+      );
+      final userId = await snapshot.get('id');
+      logger.d('UserId: $user');
+      if (userId != null) {
+        return right(User(id: uuid, email: '', isAdmin: false));
+      } else {
+        return left(Failure.authenticationError(
+            errorMessage: 'User with uuid $uuid not found'));
+      }
     } on firebase.FirebaseAuthException catch (e) {
       return left(Failure.authenticationError(errorMessage: e.message));
     }
