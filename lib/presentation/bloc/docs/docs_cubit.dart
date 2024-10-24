@@ -120,7 +120,6 @@ class DocsCubit extends Cubit<DocsCubitState> {
       List<Map<String, dynamic>> data, String userId) async {
     try {
       final supabase = supabaseDataSource.supabaseInstance;
-
       final tableName = 'documents_$userId';
       // Check if table exists
       final tableExists = await supabase.rpc('check_table_exists', params: {
@@ -135,7 +134,6 @@ class DocsCubit extends Cubit<DocsCubitState> {
         //clean table content
         await supabase.from('documents_$userId').delete().neq('id', '-1');
       }
-
       await supabaseDataSource.supabaseVectorStore.addDocuments(
         documents:
             data.map((e) => Document(pageContent: e.toString())).toList(),

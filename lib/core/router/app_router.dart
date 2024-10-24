@@ -102,7 +102,7 @@ final GoRouter router = GoRouter(
           path: '/:uuid',
           pageBuilder: (BuildContext context, GoRouterState state) {
             final uuid = state.pathParameters['uuid'];
-            logger.i('ChatScreen: $uuid');
+            logger.i('Used path with uuid: $uuid');
             return NoTransitionPage<void>(
               key: state.pageKey,
               child: const ChatScreen(),
