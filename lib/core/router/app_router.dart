@@ -23,11 +23,13 @@ final GoRouter router = GoRouter(
   errorBuilder: (context, state) {
     logger.e('Error: ${state.error}');
     context.go('/');
+    print('Error: ${state.error}');
     return const SizedBox.shrink();
   },
   debugLogDiagnostics: true,
   redirect: (BuildContext context, GoRouterState state) {
     final authBloc = getIt<AuthenticationBloc>();
+    print('Redirecting to ${state.uri}');
     if (kDebugMode) {
       print('Redirecting to ${state.uri}');
     }
@@ -53,6 +55,7 @@ final GoRouter router = GoRouter(
       navigatorKey: _shellNavigatorKey,
       pageBuilder: (BuildContext context, GoRouterState state, Widget child) {
         final authState = context.watch<AuthenticationBloc>().state;
+        print('Auth state: $authState');
         return authState.maybeWhen(
           authenticated: (User user) {
             if (user.isAdmin) {

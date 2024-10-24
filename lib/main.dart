@@ -24,6 +24,7 @@ final isProdMode = F.appFlavor == Flavor.prod;
 const openAIKey = String.fromEnvironment('openAIKey');
 const supabaseKey = String.fromEnvironment('supabaseKey');
 void main() async {
+  print('app started');
   runZonedGuarded(
     () async {
       if (openAIKey.isEmpty || supabaseKey.isEmpty) {
@@ -83,6 +84,7 @@ Future<void> _firebaseInit() async {
         measurementId: firebaseConfig['measurementId'],
       ),
     );
+    print('Firebase initialized');
   } else {
     await Firebase.initializeApp();
   }
