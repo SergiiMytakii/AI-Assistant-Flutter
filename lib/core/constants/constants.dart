@@ -1,5 +1,5 @@
 const String email = 'serjmitaki@gmail.com';
-const String domainUrl = 'http://localhost:52812';
+const String domainUrl = 'https://my-template-dev.web.app/';
 
 Map<String, String> languagesCodes = {
   'en': 'English',
