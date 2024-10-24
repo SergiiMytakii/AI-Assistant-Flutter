@@ -15,6 +15,8 @@ import 'package:ai_assiatant_flutter/presentation/screens/settings/settings_scre
 import 'package:ai_assiatant_flutter/presentation/screens/signin/sign_in_screen.dart';
 import 'package:ai_assiatant_flutter/presentation/screens/chat/chat_screen.dart';
 
+import 'dart:developer' as developer;
+
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
 final GlobalKey<NavigatorState> _shellNavigatorKey =
@@ -29,6 +31,9 @@ final GoRouter router = GoRouter(
   debugLogDiagnostics: true,
   redirect: (BuildContext context, GoRouterState state) {
     final authBloc = getIt<AuthenticationBloc>();
+
+    developer.log('redirecting to ${state.uri}');
+
     print('Redirecting to ${state.uri}');
     if (kDebugMode) {
       print('Redirecting to ${state.uri}');

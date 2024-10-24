@@ -17,6 +17,7 @@ import 'package:flutter/foundation.dart'
     show PlatformDispatcher, kDebugMode, kIsWeb;
 import 'firebase_config_dev.dart' as dev_config;
 import 'firebase_config_prod.dart' as prod_config;
+import 'dart:developer' as developer;
 
 late SharedPreferences prefs;
 final logger = Logger();
@@ -25,6 +26,9 @@ const openAIKey = String.fromEnvironment('openAIKey');
 const supabaseKey = String.fromEnvironment('supabaseKey');
 void main() async {
   print('app started');
+
+  developer.log('app started');
+
   runZonedGuarded(
     () async {
       if (openAIKey.isEmpty || supabaseKey.isEmpty) {
