@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ai_assiatant_flutter/core/router/app_router.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ai_assiatant_flutter/theme.dart';
+import 'dart:developer' as developer;
 
 import 'flavors.dart';
 
@@ -12,6 +13,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    developer.log('Run app');
     return MaterialApp(
       home: _flavorBanner(
         child: MyMultiblocProvider(

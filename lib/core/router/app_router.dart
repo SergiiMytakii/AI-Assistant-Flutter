@@ -24,8 +24,9 @@ final GlobalKey<NavigatorState> _shellNavigatorKey =
 final GoRouter router = GoRouter(
   errorBuilder: (context, state) {
     logger.e('Error: ${state.error}');
+
     context.go('/');
-    print('Error: ${state.error}');
+    developer.log('Error: ${state.error}');
     return const SizedBox.shrink();
   },
   debugLogDiagnostics: true,

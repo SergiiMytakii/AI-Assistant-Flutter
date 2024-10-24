@@ -25,8 +25,6 @@ final isProdMode = F.appFlavor == Flavor.prod;
 const openAIKey = String.fromEnvironment('openAIKey');
 const supabaseKey = String.fromEnvironment('supabaseKey');
 void main() async {
-  print('app started');
-
   developer.log('app started');
 
   runZonedGuarded(
@@ -73,7 +71,9 @@ void main() async {
 Future<void> _firebaseInit() async {
   final firebaseConfig =
       isProdMode ? prod_config.firebaseConfig : dev_config.firebaseConfig;
+  developer.log('Firebase start');
   if (kIsWeb) {
+    developer.log('is Web');
     //only for web
     preventSystemContextMenu();
     setUrlStrategy(PathUrlStrategy());
@@ -88,7 +88,7 @@ Future<void> _firebaseInit() async {
         measurementId: firebaseConfig['measurementId'],
       ),
     );
-    print('Firebase initialized');
+    developer.log('Firebase initialized');
   } else {
     await Firebase.initializeApp();
   }
