@@ -34,9 +34,16 @@
     import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
     import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
-    import { firebaseConfig } from "./firebase_config_dev.js";
-
+    
     // Initialize Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyBy7DUfD-k-KZjkRbFBH6M-8ypLTq14p9Q",
+  authDomain: "my-template-dev.firebaseapp.com",
+  projectId: "my-template-dev",
+  storageBucket: "my-template-dev.appspot.com",
+  messagingSenderId: "260962086306",
+  appId: "1:260962086306:web:eb41ee037fec1a39ca96fb"
+    };
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const firestore = getFirestore(app);
