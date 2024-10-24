@@ -1,11 +1,11 @@
 {
-    "name": "my_flutter_template",
-    "short_name": "my_flutter_template",
+    "name": "ai_assistant",
+    "short_name": "ai_assistant",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#010609FF",
+    "theme_color": "#000204FF",
+    "description": "Customer support AI assistant.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

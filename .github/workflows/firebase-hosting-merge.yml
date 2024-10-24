@@ -31,9 +31,11 @@ jobs:
       - run: flutter pub get
 
       # Step 5: Build Flutter web app
-      - run: flutter build web --dart-define FLAVOR=dev --dart-define=openAIKey=${{ secrets.openAIKey }} --dart-define=supabaseKey=${{ secrets.supabaseKey }} --web-renderer html -t lib/main_dev.dart
-              sed -i 's/\([{]\)/\\\1/g' build/web/index.html
-              sed -i 's/\([}]\)/\\\1/g' build/web/index.html
+      - name: Build and prepare web files
+        shell: bash
+        run: |
+          flutter build web --dart-define FLAVOR=dev --dart-define=openAIKey=${{ secrets.openAIKey }} --dart-define=supabaseKey=${{ secrets.supabaseKey }} --web-renderer html -t lib/main_dev.dart
+          sed -i.bak 's/{/\\{/g; s/}/\\}/g' build/web/index.html
       # Add debug steps
       - name: List build directory
         run: ls -la build/web
