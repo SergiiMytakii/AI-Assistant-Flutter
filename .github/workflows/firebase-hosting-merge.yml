@@ -31,8 +31,13 @@ jobs:
       - run: flutter pub get
 
       # Step 5: Build Flutter web app
-      - run: flutter build web --dart-define FLAVOR=dev --dart-define=openAIKey=${{ secrets.openAIKey }} --dart-define=supabaseKey=${{ secrets.supabaseKey }} --web-renderer html  --release -t lib/main_dev.dart
-      
+      - run: flutter build web --dart-define FLAVOR=dev --dart-define=openAIKey=${{ secrets.openAIKey }} --dart-define=supabaseKey=${{ secrets.supabaseKey }} --web-renderer html -t lib/main_dev.dart
+      # Add debug steps
+      - name: List build directory
+        run: ls -la build/web
+
+      - name: Check index.html content
+        run: cat build/web/index.html
       # Step 6: Deploy to Firebase Hosting
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -40,5 +45,5 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_MY_TEMPLATE_DEV }}'
           channelId: live
           projectId: my-template-dev
-        env:
-          FIREBASE_CLI_EXPERIMENTS: webframeworks
+        # env:
+        #   FIREBASE_CLI_EXPERIMENTS: webframeworks
