@@ -34,11 +34,9 @@
     import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
     import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
-    
+    import { firebaseConfig } from "./firebase_config_dev.js";
+
     // Initialize Firebase
-    const firebaseConfig = {
-      // Your Firebase config object here
-    };
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const firestore = getFirestore(app);

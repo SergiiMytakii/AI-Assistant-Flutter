@@ -7,3 +7,4 @@
 $ dart run build_runner watch --delete-conflicting-outputs
 $ dart run flutter_flavorizr
 
+- change firebase config in web when moving to prod
