@@ -11,4 +11,6 @@ class AuthenticationEvent with _$AuthenticationEvent {
   const factory AuthenticationEvent.signUpRequested(
       {required String email,
       required String password}) = AuthenticationSignUpRequested;
+  const factory AuthenticationEvent.authenticateByUuid({required String uuid}) =
+      AuthenticateByUuid;
 }

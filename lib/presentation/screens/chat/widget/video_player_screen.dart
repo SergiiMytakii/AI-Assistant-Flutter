@@ -42,7 +42,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
   Widget build(BuildContext context) {
     return YoutubePlayerScaffold(
       controller: youtubePlayerController,
-      autoFullScreen: false,
+      autoFullScreen: true,
       builder: (BuildContext context, Widget player) {
         return player;
       },

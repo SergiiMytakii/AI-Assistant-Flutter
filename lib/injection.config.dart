@@ -20,6 +20,8 @@ import 'package:ai_assiatant_flutter/data/repositories/chat_repository_impl.dart
     as _i853;
 import 'package:ai_assiatant_flutter/data/repositories/docs_repository_impl.dart'
     as _i22;
+import 'package:ai_assiatant_flutter/data/use_cases/auth/sign_in_by_uuid_use_case.dart'
+    as _i882;
 import 'package:ai_assiatant_flutter/data/use_cases/auth/sign_in_use_case.dart'
     as _i517;
 import 'package:ai_assiatant_flutter/data/use_cases/auth/sign_out_use_case.dart'
@@ -107,15 +109,11 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i691.SignOutUseCase(gh<_i530.AuthenticationRepository>()));
     gh.factory<_i937.SignUpUseCase>(
         () => _i937.SignUpUseCase(gh<_i530.AuthenticationRepository>()));
+    gh.factory<_i882.SignInByUuidUseCase>(
+        () => _i882.SignInByUuidUseCase(gh<_i530.AuthenticationRepository>()));
     gh.singleton<_i705.DocsCubit>(() => _i705.DocsCubit(
           gh<_i1009.DocsRepository>(),
           gh<_i68.SupabaseDataSource>(),
-        ));
-    gh.singleton<_i521.AuthenticationBloc>(() => _i521.AuthenticationBloc(
-          gh<_i517.SignInUseCase>(),
-          gh<_i937.SignUpUseCase>(),
-          gh<_i691.SignOutUseCase>(),
-          gh<_i975.UserStreamUseCase>(),
         ));
     gh.factory<_i536.ChatRepository>(
       () => _i853.ChatRepositoryImpl(
@@ -129,6 +127,13 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i745.ChatCubit>(
         () => _i745.ChatCubit(gh<_i536.ChatRepository>()));
+    gh.singleton<_i521.AuthenticationBloc>(() => _i521.AuthenticationBloc(
+          gh<_i517.SignInUseCase>(),
+          gh<_i937.SignUpUseCase>(),
+          gh<_i691.SignOutUseCase>(),
+          gh<_i975.UserStreamUseCase>(),
+          gh<_i882.SignInByUuidUseCase>(),
+        ));
     return this;
   }
 }

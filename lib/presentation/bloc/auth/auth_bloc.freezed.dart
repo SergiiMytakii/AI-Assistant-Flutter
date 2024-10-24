@@ -22,6 +22,7 @@ mixin _$AuthenticationEvent {
     required TResult Function() signOutRequested,
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
+    required TResult Function(String uuid) authenticateByUuid,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$AuthenticationEvent {
     TResult? Function()? signOutRequested,
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
+    TResult? Function(String uuid)? authenticateByUuid,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$AuthenticationEvent {
     TResult Function()? signOutRequested,
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
+    TResult Function(String uuid)? authenticateByUuid,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -50,6 +53,7 @@ mixin _$AuthenticationEvent {
         signInRequested,
     required TResult Function(AuthenticationSignUpRequested value)
         signUpRequested,
+    required TResult Function(AuthenticateByUuid value) authenticateByUuid,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,6 +62,7 @@ mixin _$AuthenticationEvent {
     TResult? Function(AuthenticationSignOutRequested value)? signOutRequested,
     TResult? Function(AuthenticationSignInRequested value)? signInRequested,
     TResult? Function(AuthenticationSignUpRequested value)? signUpRequested,
+    TResult? Function(AuthenticateByUuid value)? authenticateByUuid,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,6 +71,7 @@ mixin _$AuthenticationEvent {
     TResult Function(AuthenticationSignOutRequested value)? signOutRequested,
     TResult Function(AuthenticationSignInRequested value)? signInRequested,
     TResult Function(AuthenticationSignUpRequested value)? signUpRequested,
+    TResult Function(AuthenticateByUuid value)? authenticateByUuid,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -135,6 +141,7 @@ class _$CheckAuthenticationStatusImpl implements CheckAuthenticationStatus {
     required TResult Function() signOutRequested,
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
+    required TResult Function(String uuid) authenticateByUuid,
   }) {
     return checkStatus();
   }
@@ -146,6 +153,7 @@ class _$CheckAuthenticationStatusImpl implements CheckAuthenticationStatus {
     TResult? Function()? signOutRequested,
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
+    TResult? Function(String uuid)? authenticateByUuid,
   }) {
     return checkStatus?.call();
   }
@@ -157,6 +165,7 @@ class _$CheckAuthenticationStatusImpl implements CheckAuthenticationStatus {
     TResult Function()? signOutRequested,
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
+    TResult Function(String uuid)? authenticateByUuid,
     required TResult orElse(),
   }) {
     if (checkStatus != null) {
@@ -175,6 +184,7 @@ class _$CheckAuthenticationStatusImpl implements CheckAuthenticationStatus {
         signInRequested,
     required TResult Function(AuthenticationSignUpRequested value)
         signUpRequested,
+    required TResult Function(AuthenticateByUuid value) authenticateByUuid,
   }) {
     return checkStatus(this);
   }
@@ -186,6 +196,7 @@ class _$CheckAuthenticationStatusImpl implements CheckAuthenticationStatus {
     TResult? Function(AuthenticationSignOutRequested value)? signOutRequested,
     TResult? Function(AuthenticationSignInRequested value)? signInRequested,
     TResult? Function(AuthenticationSignUpRequested value)? signUpRequested,
+    TResult? Function(AuthenticateByUuid value)? authenticateByUuid,
   }) {
     return checkStatus?.call(this);
   }
@@ -197,6 +208,7 @@ class _$CheckAuthenticationStatusImpl implements CheckAuthenticationStatus {
     TResult Function(AuthenticationSignOutRequested value)? signOutRequested,
     TResult Function(AuthenticationSignInRequested value)? signInRequested,
     TResult Function(AuthenticationSignUpRequested value)? signUpRequested,
+    TResult Function(AuthenticateByUuid value)? authenticateByUuid,
     required TResult orElse(),
   }) {
     if (checkStatus != null) {
@@ -257,6 +269,7 @@ class _$AuthenticationSignOutRequestedImpl
     required TResult Function() signOutRequested,
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
+    required TResult Function(String uuid) authenticateByUuid,
   }) {
     return signOutRequested();
   }
@@ -268,6 +281,7 @@ class _$AuthenticationSignOutRequestedImpl
     TResult? Function()? signOutRequested,
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
+    TResult? Function(String uuid)? authenticateByUuid,
   }) {
     return signOutRequested?.call();
   }
@@ -279,6 +293,7 @@ class _$AuthenticationSignOutRequestedImpl
     TResult Function()? signOutRequested,
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
+    TResult Function(String uuid)? authenticateByUuid,
     required TResult orElse(),
   }) {
     if (signOutRequested != null) {
@@ -297,6 +312,7 @@ class _$AuthenticationSignOutRequestedImpl
         signInRequested,
     required TResult Function(AuthenticationSignUpRequested value)
         signUpRequested,
+    required TResult Function(AuthenticateByUuid value) authenticateByUuid,
   }) {
     return signOutRequested(this);
   }
@@ -308,6 +324,7 @@ class _$AuthenticationSignOutRequestedImpl
     TResult? Function(AuthenticationSignOutRequested value)? signOutRequested,
     TResult? Function(AuthenticationSignInRequested value)? signInRequested,
     TResult? Function(AuthenticationSignUpRequested value)? signUpRequested,
+    TResult? Function(AuthenticateByUuid value)? authenticateByUuid,
   }) {
     return signOutRequested?.call(this);
   }
@@ -319,6 +336,7 @@ class _$AuthenticationSignOutRequestedImpl
     TResult Function(AuthenticationSignOutRequested value)? signOutRequested,
     TResult Function(AuthenticationSignInRequested value)? signInRequested,
     TResult Function(AuthenticationSignUpRequested value)? signUpRequested,
+    TResult Function(AuthenticateByUuid value)? authenticateByUuid,
     required TResult orElse(),
   }) {
     if (signOutRequested != null) {
@@ -417,6 +435,7 @@ class _$AuthenticationSignInRequestedImpl
     required TResult Function() signOutRequested,
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
+    required TResult Function(String uuid) authenticateByUuid,
   }) {
     return signInRequested(email, password);
   }
@@ -428,6 +447,7 @@ class _$AuthenticationSignInRequestedImpl
     TResult? Function()? signOutRequested,
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
+    TResult? Function(String uuid)? authenticateByUuid,
   }) {
     return signInRequested?.call(email, password);
   }
@@ -439,6 +459,7 @@ class _$AuthenticationSignInRequestedImpl
     TResult Function()? signOutRequested,
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
+    TResult Function(String uuid)? authenticateByUuid,
     required TResult orElse(),
   }) {
     if (signInRequested != null) {
@@ -457,6 +478,7 @@ class _$AuthenticationSignInRequestedImpl
         signInRequested,
     required TResult Function(AuthenticationSignUpRequested value)
         signUpRequested,
+    required TResult Function(AuthenticateByUuid value) authenticateByUuid,
   }) {
     return signInRequested(this);
   }
@@ -468,6 +490,7 @@ class _$AuthenticationSignInRequestedImpl
     TResult? Function(AuthenticationSignOutRequested value)? signOutRequested,
     TResult? Function(AuthenticationSignInRequested value)? signInRequested,
     TResult? Function(AuthenticationSignUpRequested value)? signUpRequested,
+    TResult? Function(AuthenticateByUuid value)? authenticateByUuid,
   }) {
     return signInRequested?.call(this);
   }
@@ -479,6 +502,7 @@ class _$AuthenticationSignInRequestedImpl
     TResult Function(AuthenticationSignOutRequested value)? signOutRequested,
     TResult Function(AuthenticationSignInRequested value)? signInRequested,
     TResult Function(AuthenticationSignUpRequested value)? signUpRequested,
+    TResult Function(AuthenticateByUuid value)? authenticateByUuid,
     required TResult orElse(),
   }) {
     if (signInRequested != null) {
@@ -585,6 +609,7 @@ class _$AuthenticationSignUpRequestedImpl
     required TResult Function() signOutRequested,
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
+    required TResult Function(String uuid) authenticateByUuid,
   }) {
     return signUpRequested(email, password);
   }
@@ -596,6 +621,7 @@ class _$AuthenticationSignUpRequestedImpl
     TResult? Function()? signOutRequested,
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
+    TResult? Function(String uuid)? authenticateByUuid,
   }) {
     return signUpRequested?.call(email, password);
   }
@@ -607,6 +633,7 @@ class _$AuthenticationSignUpRequestedImpl
     TResult Function()? signOutRequested,
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
+    TResult Function(String uuid)? authenticateByUuid,
     required TResult orElse(),
   }) {
     if (signUpRequested != null) {
@@ -625,6 +652,7 @@ class _$AuthenticationSignUpRequestedImpl
         signInRequested,
     required TResult Function(AuthenticationSignUpRequested value)
         signUpRequested,
+    required TResult Function(AuthenticateByUuid value) authenticateByUuid,
   }) {
     return signUpRequested(this);
   }
@@ -636,6 +664,7 @@ class _$AuthenticationSignUpRequestedImpl
     TResult? Function(AuthenticationSignOutRequested value)? signOutRequested,
     TResult? Function(AuthenticationSignInRequested value)? signInRequested,
     TResult? Function(AuthenticationSignUpRequested value)? signUpRequested,
+    TResult? Function(AuthenticateByUuid value)? authenticateByUuid,
   }) {
     return signUpRequested?.call(this);
   }
@@ -647,6 +676,7 @@ class _$AuthenticationSignUpRequestedImpl
     TResult Function(AuthenticationSignOutRequested value)? signOutRequested,
     TResult Function(AuthenticationSignInRequested value)? signInRequested,
     TResult Function(AuthenticationSignUpRequested value)? signUpRequested,
+    TResult Function(AuthenticateByUuid value)? authenticateByUuid,
     required TResult orElse(),
   }) {
     if (signUpRequested != null) {
@@ -667,6 +697,162 @@ abstract class AuthenticationSignUpRequested implements AuthenticationEvent {
   _$$AuthenticationSignUpRequestedImplCopyWith<
           _$AuthenticationSignUpRequestedImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AuthenticateByUuidImplCopyWith<$Res> {
+  factory _$$AuthenticateByUuidImplCopyWith(_$AuthenticateByUuidImpl value,
+          $Res Function(_$AuthenticateByUuidImpl) then) =
+      __$$AuthenticateByUuidImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String uuid});
+}
+
+/// @nodoc
+class __$$AuthenticateByUuidImplCopyWithImpl<$Res>
+    extends _$AuthenticationEventCopyWithImpl<$Res, _$AuthenticateByUuidImpl>
+    implements _$$AuthenticateByUuidImplCopyWith<$Res> {
+  __$$AuthenticateByUuidImplCopyWithImpl(_$AuthenticateByUuidImpl _value,
+      $Res Function(_$AuthenticateByUuidImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uuid = null,
+  }) {
+    return _then(_$AuthenticateByUuidImpl(
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AuthenticateByUuidImpl implements AuthenticateByUuid {
+  const _$AuthenticateByUuidImpl({required this.uuid});
+
+  @override
+  final String uuid;
+
+  @override
+  String toString() {
+    return 'AuthenticationEvent.authenticateByUuid(uuid: $uuid)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AuthenticateByUuidImpl &&
+            (identical(other.uuid, uuid) || other.uuid == uuid));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, uuid);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AuthenticateByUuidImplCopyWith<_$AuthenticateByUuidImpl> get copyWith =>
+      __$$AuthenticateByUuidImplCopyWithImpl<_$AuthenticateByUuidImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() checkStatus,
+    required TResult Function() signOutRequested,
+    required TResult Function(String email, String password) signInRequested,
+    required TResult Function(String email, String password) signUpRequested,
+    required TResult Function(String uuid) authenticateByUuid,
+  }) {
+    return authenticateByUuid(uuid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? checkStatus,
+    TResult? Function()? signOutRequested,
+    TResult? Function(String email, String password)? signInRequested,
+    TResult? Function(String email, String password)? signUpRequested,
+    TResult? Function(String uuid)? authenticateByUuid,
+  }) {
+    return authenticateByUuid?.call(uuid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? checkStatus,
+    TResult Function()? signOutRequested,
+    TResult Function(String email, String password)? signInRequested,
+    TResult Function(String email, String password)? signUpRequested,
+    TResult Function(String uuid)? authenticateByUuid,
+    required TResult orElse(),
+  }) {
+    if (authenticateByUuid != null) {
+      return authenticateByUuid(uuid);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(CheckAuthenticationStatus value) checkStatus,
+    required TResult Function(AuthenticationSignOutRequested value)
+        signOutRequested,
+    required TResult Function(AuthenticationSignInRequested value)
+        signInRequested,
+    required TResult Function(AuthenticationSignUpRequested value)
+        signUpRequested,
+    required TResult Function(AuthenticateByUuid value) authenticateByUuid,
+  }) {
+    return authenticateByUuid(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(CheckAuthenticationStatus value)? checkStatus,
+    TResult? Function(AuthenticationSignOutRequested value)? signOutRequested,
+    TResult? Function(AuthenticationSignInRequested value)? signInRequested,
+    TResult? Function(AuthenticationSignUpRequested value)? signUpRequested,
+    TResult? Function(AuthenticateByUuid value)? authenticateByUuid,
+  }) {
+    return authenticateByUuid?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CheckAuthenticationStatus value)? checkStatus,
+    TResult Function(AuthenticationSignOutRequested value)? signOutRequested,
+    TResult Function(AuthenticationSignInRequested value)? signInRequested,
+    TResult Function(AuthenticationSignUpRequested value)? signUpRequested,
+    TResult Function(AuthenticateByUuid value)? authenticateByUuid,
+    required TResult orElse(),
+  }) {
+    if (authenticateByUuid != null) {
+      return authenticateByUuid(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AuthenticateByUuid implements AuthenticationEvent {
+  const factory AuthenticateByUuid({required final String uuid}) =
+      _$AuthenticateByUuidImpl;
+
+  String get uuid;
+  @JsonKey(ignore: true)
+  _$$AuthenticateByUuidImplCopyWith<_$AuthenticateByUuidImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:ai_assiatant_flutter/main.dart';
 import 'package:csv/csv.dart';
 
 List<Map<String, String>> csvToMap(Uint8List fileBytes) {
   final csvString = utf8.decode(fileBytes);
-  logger.d(csvString);
   // Use CsvToListConverter with proper configurations
   final rows = const CsvToListConverter()
       .convert(csvString, eol: '\r\n', fieldDelimiter: ',', textDelimiter: '"');

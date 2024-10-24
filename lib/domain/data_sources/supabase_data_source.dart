@@ -1,7 +1,7 @@
-import 'package:langchain_supabase/langchain_supabase.dart';
-import 'package:supabase_flutter/supabase_flutter.dart' as sp;
+import 'package:ai_assiatant_flutter/data/data_sources/my_supabase.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class SupabaseDataSource {
-  Supabase get supabaseVectorStore;
-  sp.SupabaseClient get supabaseInstance;
+  MySupabase get supabaseVectorStore;
+  SupabaseClient get supabaseInstance;
 }

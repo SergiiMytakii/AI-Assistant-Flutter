@@ -10,6 +10,7 @@ abstract class AuthenticationRepository {
 
   Future<Either<Failure, User>> signIn(
       {required String email, required String password});
+  Future<Either<Failure, User>> signInByUuid({required String uuid});
 
   Future<void> signOut();
 }

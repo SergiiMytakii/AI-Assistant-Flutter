@@ -2,7 +2,9 @@ import 'package:ai_assiatant_flutter/core/errors/failures.dart';
 import 'package:ai_assiatant_flutter/domain/data_sources/ai_data_source.dart';
 import 'package:ai_assiatant_flutter/domain/data_sources/supabase_data_source.dart';
 import 'package:ai_assiatant_flutter/domain/repositories/chat_repository.dart';
+import 'package:ai_assiatant_flutter/injection.dart';
 import 'package:ai_assiatant_flutter/main.dart';
+import 'package:ai_assiatant_flutter/presentation/bloc/auth/auth_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:langchain/langchain.dart';
@@ -100,8 +102,13 @@ class ChatRepositoryImpl implements ChatRepository {
   @override
   Future<Either<Failure, chat.ChatMessage>> sendInitialMessage() async {
     try {
+      final uuid = getIt<AuthenticationBloc>().user?.id;
+      if (uuid == null) {
+        return const Left(
+            Failure.authenticationError(errorMessage: 'User not found'));
+      }
       final document = await supabaseDataSource.supabaseInstance
-          .from('documents')
+          .from('documents_$uuid')
           .select('content')
           .limit(1);
 

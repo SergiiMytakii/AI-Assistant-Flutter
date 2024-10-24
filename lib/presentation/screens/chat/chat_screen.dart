@@ -28,7 +28,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void _sendMessage() {
     if (_controller.text.isNotEmpty) {
-      // getIt<ChatCubit>().sendMessage(_controller.text);
+      getIt<ChatCubit>().sendMessage(_controller.text);
       _controller.clear();
     }
   }
@@ -60,18 +60,18 @@ class _ChatScreenState extends State<ChatScreen> {
                         itemCount: state.messages.length,
                         itemBuilder: (context, index) {
                           final message =
-                              // state.messages.reversed.toList()[index];
-                              ChatMessage(
-                                  text:
-                                      ' sdlfkjsdfj sdfjsd ;flkjslkfdj s;dkfkjs d;lkfj sdkfj sdlkfj sdl;jfdsl;kjf',
-                                  isUserMessage: false,
-                                  imageUrls: [
-                                'https://images.pexels.com/photos/462118/pexels-photo-462118.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                                'https://firebasestorage.googleapis.com/v0/b/ai-consultant-4137b.appspot.com/o/images%2FIMG_7388.jpg?alt=media&token=0d72bfbf-6e7b-46dd-b550-fe35ed56b3fb'
-                              ],
-                                  videoUrls: [
-                                'https://youtube.com/shorts/EhCpNm5vla0?si=Qg5cG6hMKrFX9fu5'
-                              ]);
+                              state.messages.reversed.toList()[index];
+                          // ChatMessage(
+                          //     text:
+                          //         ' sdlfkjsdfj sdfjsd ;flkjslkfdj s;dkfkjs d;lkfj sdkfj sdlkfj sdl;jfdsl;kjf',
+                          //     isUserMessage: false,
+                          //     imageUrls: [
+                          //   'https://images.pexels.com/photos/462118/pexels-photo-462118.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                          //   'https://firebasestorage.googleapis.com/v0/b/ai-consultant-4137b.appspot.com/o/images%2FIMG_7388.jpg?alt=media&token=0d72bfbf-6e7b-46dd-b550-fe35ed56b3fb'
+                          // ],
+                          //     videoUrls: [
+                          //   'https://www.youtube.com/watch?v=oMFhQD7DztM&list=PLw6SJ6q6-1YpD_mAuJTfyFveCD5x5sEXW&index=14'
+                          // ]);
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
