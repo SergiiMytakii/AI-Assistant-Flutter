@@ -31,7 +31,7 @@ jobs:
       - run: flutter pub get
 
       # Step 5: Build Flutter web app
-      - run: flutter build web --dart-define=openAIKey=${{ secrets.openAIKey }} --dart-define=supabaseKey=${{ secrets.supabaseKey }} --web-renderer html  --release -t lib/main_dev.dart --verbose
+      - run: flutter build web --dart-define=openAIKey=${{ secrets.openAIKey }} --dart-define=supabaseKey=${{ secrets.supabaseKey }}  --release -t lib/main_dev.dart --verbose
       
       # Step 6: Deploy to Firebase Hosting
       - uses: FirebaseExtended/action-hosting-deploy@v0
