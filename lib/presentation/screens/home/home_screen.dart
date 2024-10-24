@@ -66,10 +66,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             const SizedBox(height: 16),
                             Row(
                               children: [
-                                Text('Uploaded file:'.tr()),
-                                const SizedBox(width: 16),
-                                Text(state.uploadedFile!),
-                                const SizedBox(width: 16),
+                                Text('Uploaded file: '.tr()),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 16),
+                                    child: Text(state.uploadedFile!),
+                                  ),
+                                ),
                                 IconButton(
                                   icon: const Icon(Icons.delete),
                                   onPressed: () =>
@@ -94,10 +98,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             const SizedBox(height: 16),
                             Row(
                               children: [
-                                Text('Your chatbot URL:'.tr()),
-                                const SizedBox(width: 16),
-                                Text(url),
-                                const SizedBox(width: 16),
+                                Text('Your chatbot URL: '.tr()),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 16),
+                                    child: Text(url),
+                                  ),
+                                ),
                                 IconButton(
                                   icon: const Icon(Icons.copy),
                                   onPressed: () {
