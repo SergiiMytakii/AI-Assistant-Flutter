@@ -49,12 +49,6 @@ class ChatRepositoryImpl implements ChatRepository {
   }
 
   @override
-  Future<void> receiveMessage({required String message}) {
-    // TODO: implement receiveMessage
-    throw UnimplementedError();
-  }
-
-  @override
   Future<Either<Failure, chat.ChatMessage>> sendMessage(
       {required String message}) async {
     try {
@@ -208,7 +202,8 @@ class ChatRepositoryImpl implements ChatRepository {
       final document = await supabaseDataSource.supabaseInstance
           .from('documents_$uuid')
           .select('content')
-          .limit(20);
+          .order('id', ascending: true)
+          .limit(25);
       final suggestions = document
           .map((doc) => jsonDecode(doc['content'])['question'].toString())
           .toList();

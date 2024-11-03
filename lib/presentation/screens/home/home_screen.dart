@@ -44,18 +44,21 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ElevatedButton(
-              onPressed: getIt<DocsCubit>().pickAndUploadFile,
+              onPressed: () => getIt<DocsCubit>().pickAndUploadFile(context),
               child: Text('Upload CSV File'.tr()),
             ),
             Expanded(
-              child: BlocBuilder<DocsCubit, DocsCubitState>(
+              child: BlocConsumer<DocsCubit, DocsCubitState>(
+                listener: (context, state) {
+                  if (state.errorMessage != null) {
+                    showAlertDialog(
+                        context, '${"Error: ".tr()} ${state.errorMessage}');
+                    getIt<DocsCubit>().clearErrorMessage();
+                  }
+                },
                 builder: (context, state) {
                   if (state.isLoading) {
                     return const Center(child: CircularProgressIndicator());
-                  }
-
-                  if (state.errorMessage != null) {
-                    return Text('${"Error: ".tr()} ${state.errorMessage}');
                   }
 
                   return state.uploadedFile != null

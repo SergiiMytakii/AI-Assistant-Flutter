@@ -8,8 +8,9 @@ import 'package:ai_assiatant_flutter/injection.dart';
 import 'package:ai_assiatant_flutter/main.dart';
 import 'package:ai_assiatant_flutter/presentation/bloc/auth/auth_bloc.dart';
 import 'package:ai_assiatant_flutter/presentation/bloc/docs/docs_state.dart';
-import 'package:dartz/dartz.dart';
+import 'package:ai_assiatant_flutter/presentation/screens/widget/alert_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:file_picker/file_picker.dart';
@@ -25,7 +26,7 @@ class DocsCubit extends Cubit<DocsCubitState> {
   List<Map<String, dynamic>> csvData = [];
   String fileName = '';
 
-  Future<void> pickAndUploadFile() async {
+  Future<void> pickAndUploadFile(BuildContext context) async {
     try {
       emit(state.copyWith(isLoading: true));
 
@@ -33,7 +34,7 @@ class DocsCubit extends Cubit<DocsCubitState> {
         dialogTitle: 'Select a CSV file'.tr(),
         type: FileType.custom,
         allowedExtensions: ['csv'],
-        withData: true, // Ensure the file data is included
+        withData: true,
       );
 
       if (result != null && result.files.single.bytes != null) {
@@ -43,6 +44,20 @@ class DocsCubit extends Cubit<DocsCubitState> {
       }
 
       if (csvData.isNotEmpty) {
+        if (fileName == state.uploadedFile) {
+          final shouldReplace = await showAlertDialog(
+              // ignore: use_build_context_synchronously
+              context,
+              'File already exists. Do you want to replace the existing file?'
+                  .tr(),
+              showCancelButton: true);
+
+          if (!shouldReplace) {
+            emit(state.copyWith(isLoading: false));
+            csvData = [];
+            return;
+          }
+        }
         final userId = getIt<AuthenticationBloc>().user?.id;
         if (userId != null) {
           {
@@ -142,5 +157,9 @@ class DocsCubit extends Cubit<DocsCubitState> {
     } on Exception catch (e) {
       logger.e(e);
     }
+  }
+
+  void clearErrorMessage() {
+    emit(state.copyWith(errorMessage: null));
   }
 }

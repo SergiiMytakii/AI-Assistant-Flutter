@@ -46,7 +46,8 @@ class ChatCubit extends Cubit<ChatState> {
     final result = await chatRepository.sendInitialMessage(initialLanguage);
     result.fold(
       (error) {
-        emit(state.copyWith(errorMessage: error.toUserFriendlyMessage()));
+        emit(state.copyWith(
+            errorMessage: error.toUserFriendlyMessage(), isLoading: false));
       },
       (response) {
         receiveMessage(response);
@@ -72,10 +73,11 @@ class ChatCubit extends Cubit<ChatState> {
     final result = await chatRepository.translateSuggestions(language);
     result.fold(
       (error) {
-        emit(state.copyWith(errorMessage: error.toUserFriendlyMessage()));
+        emit(state.copyWith(
+            errorMessage: error.toUserFriendlyMessage(), isLoading: false));
       },
       (response) {
-        emit(state.copyWith(suggestions: response));
+        emit(state.copyWith(suggestions: response, isLoading: false));
       },
     );
   }

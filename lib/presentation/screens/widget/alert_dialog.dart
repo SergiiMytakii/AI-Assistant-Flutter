@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 Future<bool> showAlertDialog(BuildContext context, String message,
@@ -11,13 +12,13 @@ Future<bool> showAlertDialog(BuildContext context, String message,
         actions: <Widget>[
           if (showCancelButton)
             TextButton(
-              child: const Text('Cancel'),
+              child: Text('Cancel'.tr()),
               onPressed: () {
                 Navigator.of(context).pop(false);
               },
             ),
           TextButton(
-            child: const Text('Ok'),
+            child: Text('Ok'.tr()),
             onPressed: () {
               Navigator.of(context).pop(true);
             },
