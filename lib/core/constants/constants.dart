@@ -1,5 +1,5 @@
 const String email = 'serjmitaki@gmail.com';
-const String domainUrl = 'https://my-template-dev.web.app/';
+const String domainUrl = 'https://app.aiassist4u.com';
 
 Map<String, String> languagesCodes = {
   'en': 'English',

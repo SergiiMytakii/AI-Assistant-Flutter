@@ -61,15 +61,15 @@ class _RootScreenState extends State<RootScreen> {
                     destinations: [
                       NavigationRailDestination(
                         icon: const Icon(Icons.home),
-                        label: Text('Home'.tr()),
+                        label: Text(context.tr('Home')),
                       ),
                       NavigationRailDestination(
                         icon: const Icon(Icons.chat),
-                        label: Text('Chat'.tr()),
+                        label: Text(context.tr('Chat')),
                       ),
                       NavigationRailDestination(
                         icon: const Icon(Icons.settings),
-                        label: Text('Settings'.tr()),
+                        label: Text(context.tr('Settings')),
                       ),
                     ],
                   ),
@@ -113,18 +113,18 @@ class _RootScreenState extends State<RootScreen> {
               break;
           }
         },
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: const Icon(Icons.home),
+            label: context.tr('Home'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: 'Chat',
+            icon: const Icon(Icons.chat),
+            label: context.tr('Chat'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: const Icon(Icons.settings),
+            label: context.tr('Settings'),
           ),
         ],
       ),
