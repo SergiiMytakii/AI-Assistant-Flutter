@@ -55,7 +55,7 @@ class ChatRepositoryImpl implements ChatRepository {
       final documents =
           await supabaseDataSource.supabaseVectorStore.similaritySearch(
         query: message,
-        config: const SupabaseSimilaritySearch(k: 4),
+        config: const SupabaseSimilaritySearch(k: 2),
       );
       final context = documents.map((e) => e.pageContent).toList();
       final outputTemplate = {
@@ -67,10 +67,6 @@ class ChatRepositoryImpl implements ChatRepository {
           {'url': 'url if available', 'caption': 'caption if available'}
         ],
         'isUserMessage': false,
-        'detectedLanguage': 'detect user language',
-        'responseLanguage': 'response language',
-        'reason':
-            'reason why response language is different from user language',
       };
       final query = {
         'outputTemplate': outputTemplate,
@@ -89,9 +85,9 @@ class ChatRepositoryImpl implements ChatRepository {
           6. If you can't find an answer in the context, politely inform the user in their language, like this: "I'm sorry, I couldn't find a specific answer to your question. Could you rephrase it, or is there anything else I can assist you with? 😕"
           7. Add appropriate emojis to keep the tone friendly.
           8. If the user sounds angry or upset, express sympathy and use a sad emoji.
-          9. return result as valid JSON using the following structure: {outputTemplate}
-          10. compare the user's language with the context's language. if they are different, translate the relevant information from the context into the user's language before responding. Ensure your entire response is in the user's language, not the context's language.
-          11. Do not iclude any links in the text response. 
+          9. Compare the user's language with the context's language. if they are different, translate the relevant information from the context into the user's language before responding. Ensure your entire response is in the user's language, not the context's language.
+          10. Links for images or videos should go to images or videos fields, not to the main message text. Do not miss them. 
+          11. Return result as valid JSON using the following structure: {outputTemplate}
           Context: {context}
           User's Request: {input}
                 ''');

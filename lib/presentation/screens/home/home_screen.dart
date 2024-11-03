@@ -81,8 +81,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   IconButton(
                                     icon: const Icon(Icons.delete),
-                                    onPressed: () =>
-                                        getIt<DocsCubit>().deleteFile(),
+                                    onPressed: () async {
+                                      final isConfirmed = await showAlertDialog(
+                                          context,
+                                          'Are you sure you want to delete this file?'
+                                              .tr());
+                                      if (isConfirmed) {
+                                        getIt<DocsCubit>().deleteFile();
+                                      }
+                                    },
                                   ),
                                 ],
                               ),

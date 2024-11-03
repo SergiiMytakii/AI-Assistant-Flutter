@@ -76,7 +76,6 @@ class _ChatScreenState extends State<ChatScreen> {
       itemCount: state.messages.length,
       itemBuilder: (context, index) {
         final message = state.messages.reversed.toList()[index];
-
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -193,6 +192,10 @@ const testMessage = ChatMessage(
         ' sdlfkjsdfj sdfjsd ;flkjslkfdj s;dkfkjs d;lkfj sdkfj sdlkfj sdl;jfdsl;kjf',
     isUserMessage: false,
     images: [
+      Resource(
+          url:
+              'https://odessa.travel/do/sights-odessa/park-garden/stambulskiy-park',
+          caption: 'some caption'),
       Resource(
           url:
               'https://images.pexels.com/photos/462118/pexels-photo-462118.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
