@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        backgroundColor: Colors.transparent,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -45,83 +45,87 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             ElevatedButton(
               onPressed: getIt<DocsCubit>().pickAndUploadFile,
-              child: const Text('Upload CSV File'),
+              child: Text('Upload CSV File'.tr()),
             ),
-            BlocBuilder<DocsCubit, DocsCubitState>(
-              builder: (context, state) {
-                if (state.isLoading) {
-                  return const CircularProgressIndicator();
-                }
+            Expanded(
+              child: BlocBuilder<DocsCubit, DocsCubitState>(
+                builder: (context, state) {
+                  if (state.isLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
 
-                if (state.errorMessage != null) {
-                  return Text('Error: ${state.errorMessage}');
-                }
+                  if (state.errorMessage != null) {
+                    return Text('${"Error: ".tr()} ${state.errorMessage}');
+                  }
 
-                return state.uploadedFile != null
-                    ? Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 16),
-                            Row(
-                              children: [
-                                Text('Uploaded file: '.tr()),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 16),
-                                    child: Text(state.uploadedFile!),
+                  return state.uploadedFile != null
+                      ? Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 16),
+                              Text('Uploaded file: '.tr()),
+                              const SizedBox(height: 6),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 16),
+                                      child: Text(state.uploadedFile!),
+                                    ),
                                   ),
-                                ),
-                                IconButton(
-                                  icon: const Icon(Icons.delete),
-                                  onPressed: () =>
-                                      getIt<DocsCubit>().deleteFile(),
-                                ),
-                              ],
-                            ),
-                            RepaintBoundary(
-                              key: qrKey,
-                              child: QrImageView(
-                                backgroundColor: Colors.white,
-                                data: url,
-                                version: QrVersions.auto,
-                                size: 200.0,
+                                  IconButton(
+                                    icon: const Icon(Icons.delete),
+                                    onPressed: () =>
+                                        getIt<DocsCubit>().deleteFile(),
+                                  ),
+                                ],
                               ),
-                            ),
-                            const SizedBox(height: 16),
-                            ElevatedButton(
-                              onPressed: () => _downloadImage(),
-                              child: Text('Download QR Code'.tr()),
-                            ),
-                            const SizedBox(height: 16),
-                            Row(
-                              children: [
-                                Text('Your chatbot URL: '.tr()),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 16),
-                                    child: Text(url),
+                              RepaintBoundary(
+                                key: qrKey,
+                                child: QrImageView(
+                                  backgroundColor: Colors.white,
+                                  data: url,
+                                  version: QrVersions.auto,
+                                  size: 200.0,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              ElevatedButton(
+                                onPressed: () => _downloadImage(),
+                                child: Text('Download QR Code'.tr()),
+                              ),
+                              const SizedBox(height: 16),
+                              Text('Your chatbot URL: '.tr()),
+                              const SizedBox(height: 6),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 16),
+                                      child: Text(url),
+                                    ),
                                   ),
-                                ),
-                                IconButton(
-                                  icon: const Icon(Icons.copy),
-                                  onPressed: () {
-                                    html.window.navigator.clipboard
-                                        ?.writeText(url);
-                                    showAlertDialog(
-                                        context, 'Copied to clipboard'.tr());
-                                  },
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      )
-                    : const SizedBox.shrink();
-              },
+                                  IconButton(
+                                    icon: const Icon(Icons.copy),
+                                    onPressed: () {
+                                      html.window.navigator.clipboard
+                                          ?.writeText(url);
+                                      showAlertDialog(
+                                          context, 'Copied to clipboard'.tr());
+                                    },
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                      : const SizedBox.shrink();
+                },
+              ),
             ),
           ],
         ),

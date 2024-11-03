@@ -25,8 +25,6 @@ final isProdMode = F.appFlavor == Flavor.prod;
 const openAIKey = String.fromEnvironment('openAIKey');
 const supabaseKey = String.fromEnvironment('supabaseKey');
 void main() async {
-  developer.log('app started');
-
   runZonedGuarded(
     () async {
       if (openAIKey.isEmpty || supabaseKey.isEmpty) {
@@ -75,7 +73,6 @@ Future<void> _firebaseInit() async {
   if (kIsWeb) {
     developer.log('is Web');
     //only for web
-    preventSystemContextMenu();
     setUrlStrategy(PathUrlStrategy());
     await Firebase.initializeApp(
       options: FirebaseOptions(
@@ -109,15 +106,4 @@ void _activateCrashlitics() {
     }
     return true;
   };
-}
-
-void preventSystemContextMenu() {
-  final script = html.ScriptElement()
-    ..type = 'text/javascript'
-    ..innerHtml = '''
-      document.addEventListener('contextmenu', function(event) {
-        event.preventDefault();
-      });
-    ''';
-  html.document.head!.append(script);
 }

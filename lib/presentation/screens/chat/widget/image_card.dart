@@ -7,7 +7,7 @@ class ImageCard extends StatelessWidget {
   ImageCard({
     super.key,
     required this.message,
-  }) : assert(message.imageUrls != null && message.imageUrls!.isNotEmpty);
+  }) : assert(message.images != null && message.images!.isNotEmpty);
   final ChatMessage message;
 
   @override
@@ -16,33 +16,42 @@ class ImageCard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
-      children: message.imageUrls!
-          .map((imageUrl) => Padding(
+      children: message.images!
+          .map((image) => Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: ConstrainedBox(
-                    constraints: const BoxConstraints(
-                        maxHeight: 300,
-                        maxWidth: 300,
-                        minWidth: 150,
-                        minHeight: 150),
-                    child: fullScreenHeroWidget(imageUrl)),
+                  constraints: const BoxConstraints(
+                    maxWidth: 300,
+                    minWidth: 150,
+                  ),
+                  child: Column(
+                    children: [
+                      fullScreenHeroWidget(image.url),
+                      if (image.caption != null) const SizedBox(height: 8),
+                      if (image.caption != null) Text(image.caption!)
+                    ],
+                  ),
+                ),
               ))
           .toList(),
     );
   }
 
   Widget fullScreenHeroWidget(String imageUrl) => FullScreenWidget(
-        disposeLevel: DisposeLevel.Low,
-        child: Hero(
-          tag: imageUrl,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(8),
+      disposeLevel: DisposeLevel.Low,
+      child: Hero(
+        tag: imageUrl,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+                maxHeight: 320, maxWidth: 300, minWidth: 150, minHeight: 170),
             child: Image.network(
               imageUrl,
               fit: BoxFit.cover,
             ),
           ),
         ),
-      );
+      ));
 }

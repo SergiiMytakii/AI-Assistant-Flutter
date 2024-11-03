@@ -6,6 +6,13 @@ abstract class ChatRepository {
   Future<Either<Failure, ChatMessage>> sendMessage({required String message});
   Future<void> receiveMessage({required String message});
 
-  Future<Either<Failure, ChatMessage>> sendInitialMessage();
+  Future<Either<Failure, ChatMessage>> sendInitialMessage(
+      String initialLanguage);
+
+  Future<Either<Failure, List<String>>> getSuggestions();
+  Future<Either<Failure, List<String>>> translateSuggestions(String language);
+
+  Future<Either<Failure, String>> getInitialLanguage();
+
   // Future<void> getMessages({required String message});
 }

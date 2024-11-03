@@ -17,11 +17,15 @@ class _RootScreenState extends State<RootScreen> {
   int? _selectedIndex;
   @override
   Widget build(BuildContext context) {
-    if (kIsWeb) {
-      return _buildWebRootBody(context);
-    } else {
-      return _buildMobileRootBody(context);
-    }
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        if (kIsWeb && constraints.maxWidth > 500) {
+          return _buildWebRootBody(context);
+        } else {
+          return _buildMobileRootBody(context);
+        }
+      },
+    );
   }
 
   Scaffold _buildWebRootBody(BuildContext context) {

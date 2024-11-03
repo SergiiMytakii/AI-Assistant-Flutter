@@ -32,10 +32,6 @@ final GoRouter router = GoRouter(
   debugLogDiagnostics: true,
   redirect: (BuildContext context, GoRouterState state) {
     final authBloc = getIt<AuthenticationBloc>();
-
-    developer.log('redirecting to ${state.uri}');
-
-    print('Redirecting to ${state.uri}');
     if (kDebugMode) {
       print('Redirecting to ${state.uri}');
     }

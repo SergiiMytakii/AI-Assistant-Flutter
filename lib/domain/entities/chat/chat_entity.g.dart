@@ -9,11 +9,11 @@ part of 'chat_entity.dart';
 _$ChatMessageImpl _$$ChatMessageImplFromJson(Map<String, dynamic> json) =>
     _$ChatMessageImpl(
       text: json['text'] as String,
-      imageUrls: (json['imageUrls'] as List<dynamic>?)
-          ?.map((e) => e as String)
+      images: (json['images'] as List<dynamic>?)
+          ?.map((e) => Resource.fromJson(e as Map<String, dynamic>))
           .toList(),
-      videoUrls: (json['videoUrls'] as List<dynamic>?)
-          ?.map((e) => e as String)
+      videos: (json['videos'] as List<dynamic>?)
+          ?.map((e) => Resource.fromJson(e as Map<String, dynamic>))
           .toList(),
       isUserMessage: json['isUserMessage'] as bool,
     );
@@ -21,7 +21,19 @@ _$ChatMessageImpl _$$ChatMessageImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$ChatMessageImplToJson(_$ChatMessageImpl instance) =>
     <String, dynamic>{
       'text': instance.text,
-      'imageUrls': instance.imageUrls,
-      'videoUrls': instance.videoUrls,
+      'images': instance.images?.map((e) => e.toJson()).toList(),
+      'videos': instance.videos?.map((e) => e.toJson()).toList(),
       'isUserMessage': instance.isUserMessage,
+    };
+
+_$ResourceImpl _$$ResourceImplFromJson(Map<String, dynamic> json) =>
+    _$ResourceImpl(
+      url: json['url'] as String,
+      caption: json['caption'] as String?,
+    );
+
+Map<String, dynamic> _$$ResourceImplToJson(_$ResourceImpl instance) =>
+    <String, dynamic>{
+      'url': instance.url,
+      'caption': instance.caption,
     };

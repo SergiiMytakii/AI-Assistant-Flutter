@@ -8,6 +8,6 @@ abstract class DocsRepository {
       required List<Map<String, dynamic>> data,
       required String documentRef});
   Future<void> deleteDocument({required String path});
-  Future<Either<Failure, QandAdocument>> getDocument(
+  Future<Either<Failure, QandAdocument?>> getDocument(
       {Map<String, dynamic>? fields, required String docReference});
 }

@@ -103,14 +103,14 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i975.UserStreamUseCase>(
         () => _i975.UserStreamUseCase(gh<_i530.AuthenticationRepository>()));
+    gh.factory<_i882.SignInByUuidUseCase>(
+        () => _i882.SignInByUuidUseCase(gh<_i530.AuthenticationRepository>()));
     gh.factory<_i517.SignInUseCase>(
         () => _i517.SignInUseCase(gh<_i530.AuthenticationRepository>()));
     gh.factory<_i691.SignOutUseCase>(
         () => _i691.SignOutUseCase(gh<_i530.AuthenticationRepository>()));
     gh.factory<_i937.SignUpUseCase>(
         () => _i937.SignUpUseCase(gh<_i530.AuthenticationRepository>()));
-    gh.factory<_i882.SignInByUuidUseCase>(
-        () => _i882.SignInByUuidUseCase(gh<_i530.AuthenticationRepository>()));
     gh.singleton<_i705.DocsCubit>(() => _i705.DocsCubit(
           gh<_i1009.DocsRepository>(),
           gh<_i68.SupabaseDataSource>(),

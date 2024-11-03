@@ -41,9 +41,12 @@ class _AnimatedDotsState extends State<AnimatedDots>
                       _animation.value < ((index + 1) * 0.33)
                   ? 1
                   : 0.2,
-              child: const Text(
-                '.',
-                style: TextStyle(fontSize: 48, color: Colors.blue),
+              child: const Padding(
+                padding: EdgeInsets.all(1.0),
+                child: CircleAvatar(
+                  radius: 3,
+                  backgroundColor: Colors.blue,
+                ),
               ),
             );
           }),

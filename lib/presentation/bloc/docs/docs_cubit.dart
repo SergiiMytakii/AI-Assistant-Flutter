@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:ai_assiatant_flutter/core/utils/csv_to_map.dart';
@@ -29,7 +30,7 @@ class DocsCubit extends Cubit<DocsCubitState> {
       emit(state.copyWith(isLoading: true));
 
       FilePickerResult? result = await FilePicker.platform.pickFiles(
-        dialogTitle: 'Select a CSV file',
+        dialogTitle: 'Select a CSV file'.tr(),
         type: FileType.custom,
         allowedExtensions: ['csv'],
         withData: true, // Ensure the file data is included
@@ -103,7 +104,7 @@ class DocsCubit extends Cubit<DocsCubitState> {
         )),
         (document) {
           emit(state.copyWith(
-            uploadedFile: document.fileName,
+            uploadedFile: document?.fileName,
             isLoading: false,
           ));
         },
@@ -136,7 +137,7 @@ class DocsCubit extends Cubit<DocsCubitState> {
       }
       await supabaseDataSource.supabaseVectorStore.addDocuments(
         documents:
-            data.map((e) => Document(pageContent: e.toString())).toList(),
+            data.map((e) => Document(pageContent: jsonEncode(e))).toList(),
       );
     } on Exception catch (e) {
       logger.e(e);

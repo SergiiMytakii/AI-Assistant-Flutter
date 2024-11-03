@@ -17,7 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ChatState {
   List<ChatMessage> get messages => throw _privateConstructorUsedError;
+  List<String> get suggestions => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
+  String get language => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +32,12 @@ abstract class $ChatStateCopyWith<$Res> {
   factory $ChatStateCopyWith(ChatState value, $Res Function(ChatState) then) =
       _$ChatStateCopyWithImpl<$Res, ChatState>;
   @useResult
-  $Res call({List<ChatMessage> messages, String? errorMessage, bool isLoading});
+  $Res call(
+      {List<ChatMessage> messages,
+      List<String> suggestions,
+      String? errorMessage,
+      String language,
+      bool isLoading});
 }
 
 /// @nodoc
@@ -47,7 +54,9 @@ class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
   @override
   $Res call({
     Object? messages = null,
+    Object? suggestions = null,
     Object? errorMessage = freezed,
+    Object? language = null,
     Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
@@ -55,10 +64,18 @@ class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
           ? _value.messages
           : messages // ignore: cast_nullable_to_non_nullable
               as List<ChatMessage>,
+      suggestions: null == suggestions
+          ? _value.suggestions
+          : suggestions // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -75,7 +92,12 @@ abstract class _$$ChatStateImplCopyWith<$Res>
       __$$ChatStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<ChatMessage> messages, String? errorMessage, bool isLoading});
+  $Res call(
+      {List<ChatMessage> messages,
+      List<String> suggestions,
+      String? errorMessage,
+      String language,
+      bool isLoading});
 }
 
 /// @nodoc
@@ -90,7 +112,9 @@ class __$$ChatStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? messages = null,
+    Object? suggestions = null,
     Object? errorMessage = freezed,
+    Object? language = null,
     Object? isLoading = null,
   }) {
     return _then(_$ChatStateImpl(
@@ -98,10 +122,18 @@ class __$$ChatStateImplCopyWithImpl<$Res>
           ? _value._messages
           : messages // ignore: cast_nullable_to_non_nullable
               as List<ChatMessage>,
+      suggestions: null == suggestions
+          ? _value._suggestions
+          : suggestions // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -115,9 +147,12 @@ class __$$ChatStateImplCopyWithImpl<$Res>
 class _$ChatStateImpl implements _ChatState {
   const _$ChatStateImpl(
       {final List<ChatMessage> messages = const [],
+      final List<String> suggestions = const [],
       this.errorMessage,
+      this.language = 'uk',
       this.isLoading = false})
-      : _messages = messages;
+      : _messages = messages,
+        _suggestions = suggestions;
 
   final List<ChatMessage> _messages;
   @override
@@ -128,15 +163,27 @@ class _$ChatStateImpl implements _ChatState {
     return EqualUnmodifiableListView(_messages);
   }
 
+  final List<String> _suggestions;
+  @override
+  @JsonKey()
+  List<String> get suggestions {
+    if (_suggestions is EqualUnmodifiableListView) return _suggestions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_suggestions);
+  }
+
   @override
   final String? errorMessage;
+  @override
+  @JsonKey()
+  final String language;
   @override
   @JsonKey()
   final bool isLoading;
 
   @override
   String toString() {
-    return 'ChatState(messages: $messages, errorMessage: $errorMessage, isLoading: $isLoading)';
+    return 'ChatState(messages: $messages, suggestions: $suggestions, errorMessage: $errorMessage, language: $language, isLoading: $isLoading)';
   }
 
   @override
@@ -145,15 +192,24 @@ class _$ChatStateImpl implements _ChatState {
         (other.runtimeType == runtimeType &&
             other is _$ChatStateImpl &&
             const DeepCollectionEquality().equals(other._messages, _messages) &&
+            const DeepCollectionEquality()
+                .equals(other._suggestions, _suggestions) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
+            (identical(other.language, language) ||
+                other.language == language) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_messages), errorMessage, isLoading);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_messages),
+      const DeepCollectionEquality().hash(_suggestions),
+      errorMessage,
+      language,
+      isLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -165,13 +221,19 @@ class _$ChatStateImpl implements _ChatState {
 abstract class _ChatState implements ChatState {
   const factory _ChatState(
       {final List<ChatMessage> messages,
+      final List<String> suggestions,
       final String? errorMessage,
+      final String language,
       final bool isLoading}) = _$ChatStateImpl;
 
   @override
   List<ChatMessage> get messages;
   @override
+  List<String> get suggestions;
+  @override
   String? get errorMessage;
+  @override
+  String get language;
   @override
   bool get isLoading;
   @override

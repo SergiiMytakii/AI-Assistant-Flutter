@@ -18,6 +18,7 @@ class App extends StatelessWidget {
       home: _flavorBanner(
         child: MyMultiblocProvider(
           child: MaterialApp.router(
+            debugShowCheckedModeBanner: false,
             routerConfig: router,
             title: F.title,
             theme: lightTheme,

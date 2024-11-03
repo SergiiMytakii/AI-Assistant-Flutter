@@ -42,7 +42,7 @@ class DocsRepositoryImpl implements DocsRepository {
   }
 
   @override
-  Future<Either<Failure, QandAdocument>> getDocument(
+  Future<Either<Failure, QandAdocument?>> getDocument(
       {Map<String, dynamic>? fields, required String docReference}) async {
     try {
       final result = await firebaseDataSource.getOneFromFirebaseDB(
@@ -50,6 +50,9 @@ class DocsRepositoryImpl implements DocsRepository {
           docReference: docReference);
       if (result.exists) {
         final user = result.data() as Map<String, dynamic>;
+        if (user['q&a'] == null) {
+          return const Right(null);
+        }
         final documentData =
             QandAdocument.fromJson(user['q&a'] as Map<String, dynamic>);
         return Right(documentData);

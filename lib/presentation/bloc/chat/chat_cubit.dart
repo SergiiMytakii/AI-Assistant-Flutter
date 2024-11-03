@@ -1,6 +1,8 @@
 import 'package:ai_assiatant_flutter/domain/entities/chat/chat_entity.dart';
 import 'package:ai_assiatant_flutter/domain/repositories/chat_repository.dart';
+import 'package:ai_assiatant_flutter/main.dart';
 import 'package:ai_assiatant_flutter/presentation/bloc/chat/chat_state.dart';
+import 'package:ai_assiatant_flutter/presentation/screens/chat/widget/video_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -39,9 +41,9 @@ class ChatCubit extends Cubit<ChatState> {
     ));
   }
 
-  void sendInitialMessage() async {
+  void sendInitialMessage({required String initialLanguage}) async {
     emit(state.copyWith(isLoading: true));
-    final result = await chatRepository.sendInitialMessage();
+    final result = await chatRepository.sendInitialMessage(initialLanguage);
     result.fold(
       (error) {
         emit(state.copyWith(errorMessage: error.toUserFriendlyMessage()));
@@ -50,5 +52,58 @@ class ChatCubit extends Cubit<ChatState> {
         receiveMessage(response);
       },
     );
+  }
+
+  void getSuggestions() async {
+    emit(state.copyWith(isLoading: true));
+    final result = await chatRepository.getSuggestions();
+    result.fold(
+      (error) {
+        emit(state.copyWith(errorMessage: error.toUserFriendlyMessage()));
+      },
+      (response) {
+        emit(state.copyWith(suggestions: response));
+      },
+    );
+  }
+
+  void translateSuggestions(String language) async {
+    emit(state.copyWith(isLoading: true));
+    final result = await chatRepository.translateSuggestions(language);
+    result.fold(
+      (error) {
+        emit(state.copyWith(errorMessage: error.toUserFriendlyMessage()));
+      },
+      (response) {
+        emit(state.copyWith(suggestions: response));
+      },
+    );
+  }
+
+  void getInitialLanguage() async {
+    final locale = prefs.getString('language');
+    if (locale != null) {
+      emit(state.copyWith(language: locale));
+      sendInitialMessage(initialLanguage: locale);
+      translateSuggestions(locale);
+    } else {
+      final result = await chatRepository.getInitialLanguage();
+      result.fold(
+        (error) {
+          emit(state.copyWith(errorMessage: error.toUserFriendlyMessage()));
+        },
+        (response) {
+          emit(state.copyWith(language: response));
+          sendInitialMessage(initialLanguage: response);
+          getSuggestions();
+        },
+      );
+    }
+  }
+
+  void changeLanguage(String languageCode) async {
+    emit(state.copyWith(language: languageCode));
+    translateSuggestions(languageCode);
+    sendInitialMessage(initialLanguage: languageCode);
   }
 }

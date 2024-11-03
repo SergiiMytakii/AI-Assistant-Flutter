@@ -6,7 +6,9 @@ part 'chat_state.freezed.dart';
 class ChatState with _$ChatState {
   const factory ChatState({
     @Default([]) List<ChatMessage> messages,
+    @Default([]) List<String> suggestions,
     String? errorMessage,
+    @Default('uk') String language,
     @Default(false) bool isLoading,
   }) = _ChatState;
 }

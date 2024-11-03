@@ -21,8 +21,8 @@ ChatMessage _$ChatMessageFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ChatMessage {
   String get text => throw _privateConstructorUsedError;
-  List<String>? get imageUrls => throw _privateConstructorUsedError;
-  List<String>? get videoUrls => throw _privateConstructorUsedError;
+  List<Resource>? get images => throw _privateConstructorUsedError;
+  List<Resource>? get videos => throw _privateConstructorUsedError;
   bool get isUserMessage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,8 +39,8 @@ abstract class $ChatMessageCopyWith<$Res> {
   @useResult
   $Res call(
       {String text,
-      List<String>? imageUrls,
-      List<String>? videoUrls,
+      List<Resource>? images,
+      List<Resource>? videos,
       bool isUserMessage});
 }
 
@@ -58,8 +58,8 @@ class _$ChatMessageCopyWithImpl<$Res, $Val extends ChatMessage>
   @override
   $Res call({
     Object? text = null,
-    Object? imageUrls = freezed,
-    Object? videoUrls = freezed,
+    Object? images = freezed,
+    Object? videos = freezed,
     Object? isUserMessage = null,
   }) {
     return _then(_value.copyWith(
@@ -67,14 +67,14 @@ class _$ChatMessageCopyWithImpl<$Res, $Val extends ChatMessage>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      imageUrls: freezed == imageUrls
-          ? _value.imageUrls
-          : imageUrls // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      videoUrls: freezed == videoUrls
-          ? _value.videoUrls
-          : videoUrls // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+      images: freezed == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<Resource>?,
+      videos: freezed == videos
+          ? _value.videos
+          : videos // ignore: cast_nullable_to_non_nullable
+              as List<Resource>?,
       isUserMessage: null == isUserMessage
           ? _value.isUserMessage
           : isUserMessage // ignore: cast_nullable_to_non_nullable
@@ -93,8 +93,8 @@ abstract class _$$ChatMessageImplCopyWith<$Res>
   @useResult
   $Res call(
       {String text,
-      List<String>? imageUrls,
-      List<String>? videoUrls,
+      List<Resource>? images,
+      List<Resource>? videos,
       bool isUserMessage});
 }
 
@@ -110,8 +110,8 @@ class __$$ChatMessageImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? text = null,
-    Object? imageUrls = freezed,
-    Object? videoUrls = freezed,
+    Object? images = freezed,
+    Object? videos = freezed,
     Object? isUserMessage = null,
   }) {
     return _then(_$ChatMessageImpl(
@@ -119,14 +119,14 @@ class __$$ChatMessageImplCopyWithImpl<$Res>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      imageUrls: freezed == imageUrls
-          ? _value._imageUrls
-          : imageUrls // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      videoUrls: freezed == videoUrls
-          ? _value._videoUrls
-          : videoUrls // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+      images: freezed == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<Resource>?,
+      videos: freezed == videos
+          ? _value._videos
+          : videos // ignore: cast_nullable_to_non_nullable
+              as List<Resource>?,
       isUserMessage: null == isUserMessage
           ? _value.isUserMessage
           : isUserMessage // ignore: cast_nullable_to_non_nullable
@@ -136,37 +136,38 @@ class __$$ChatMessageImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$ChatMessageImpl implements _ChatMessage {
   const _$ChatMessageImpl(
       {required this.text,
-      final List<String>? imageUrls,
-      final List<String>? videoUrls,
+      final List<Resource>? images,
+      final List<Resource>? videos,
       required this.isUserMessage})
-      : _imageUrls = imageUrls,
-        _videoUrls = videoUrls;
+      : _images = images,
+        _videos = videos;
 
   factory _$ChatMessageImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChatMessageImplFromJson(json);
 
   @override
   final String text;
-  final List<String>? _imageUrls;
+  final List<Resource>? _images;
   @override
-  List<String>? get imageUrls {
-    final value = _imageUrls;
+  List<Resource>? get images {
+    final value = _images;
     if (value == null) return null;
-    if (_imageUrls is EqualUnmodifiableListView) return _imageUrls;
+    if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
-  final List<String>? _videoUrls;
+  final List<Resource>? _videos;
   @override
-  List<String>? get videoUrls {
-    final value = _videoUrls;
+  List<Resource>? get videos {
+    final value = _videos;
     if (value == null) return null;
-    if (_videoUrls is EqualUnmodifiableListView) return _videoUrls;
+    if (_videos is EqualUnmodifiableListView) return _videos;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -176,7 +177,7 @@ class _$ChatMessageImpl implements _ChatMessage {
 
   @override
   String toString() {
-    return 'ChatMessage(text: $text, imageUrls: $imageUrls, videoUrls: $videoUrls, isUserMessage: $isUserMessage)';
+    return 'ChatMessage(text: $text, images: $images, videos: $videos, isUserMessage: $isUserMessage)';
   }
 
   @override
@@ -185,10 +186,8 @@ class _$ChatMessageImpl implements _ChatMessage {
         (other.runtimeType == runtimeType &&
             other is _$ChatMessageImpl &&
             (identical(other.text, text) || other.text == text) &&
-            const DeepCollectionEquality()
-                .equals(other._imageUrls, _imageUrls) &&
-            const DeepCollectionEquality()
-                .equals(other._videoUrls, _videoUrls) &&
+            const DeepCollectionEquality().equals(other._images, _images) &&
+            const DeepCollectionEquality().equals(other._videos, _videos) &&
             (identical(other.isUserMessage, isUserMessage) ||
                 other.isUserMessage == isUserMessage));
   }
@@ -198,8 +197,8 @@ class _$ChatMessageImpl implements _ChatMessage {
   int get hashCode => Object.hash(
       runtimeType,
       text,
-      const DeepCollectionEquality().hash(_imageUrls),
-      const DeepCollectionEquality().hash(_videoUrls),
+      const DeepCollectionEquality().hash(_images),
+      const DeepCollectionEquality().hash(_videos),
       isUserMessage);
 
   @JsonKey(ignore: true)
@@ -219,8 +218,8 @@ class _$ChatMessageImpl implements _ChatMessage {
 abstract class _ChatMessage implements ChatMessage {
   const factory _ChatMessage(
       {required final String text,
-      final List<String>? imageUrls,
-      final List<String>? videoUrls,
+      final List<Resource>? images,
+      final List<Resource>? videos,
       required final bool isUserMessage}) = _$ChatMessageImpl;
 
   factory _ChatMessage.fromJson(Map<String, dynamic> json) =
@@ -229,13 +228,165 @@ abstract class _ChatMessage implements ChatMessage {
   @override
   String get text;
   @override
-  List<String>? get imageUrls;
+  List<Resource>? get images;
   @override
-  List<String>? get videoUrls;
+  List<Resource>? get videos;
   @override
   bool get isUserMessage;
   @override
   @JsonKey(ignore: true)
   _$$ChatMessageImplCopyWith<_$ChatMessageImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Resource _$ResourceFromJson(Map<String, dynamic> json) {
+  return _Resource.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Resource {
+  String get url => throw _privateConstructorUsedError;
+  String? get caption => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ResourceCopyWith<Resource> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ResourceCopyWith<$Res> {
+  factory $ResourceCopyWith(Resource value, $Res Function(Resource) then) =
+      _$ResourceCopyWithImpl<$Res, Resource>;
+  @useResult
+  $Res call({String url, String? caption});
+}
+
+/// @nodoc
+class _$ResourceCopyWithImpl<$Res, $Val extends Resource>
+    implements $ResourceCopyWith<$Res> {
+  _$ResourceCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? url = null,
+    Object? caption = freezed,
+  }) {
+    return _then(_value.copyWith(
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+      caption: freezed == caption
+          ? _value.caption
+          : caption // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ResourceImplCopyWith<$Res>
+    implements $ResourceCopyWith<$Res> {
+  factory _$$ResourceImplCopyWith(
+          _$ResourceImpl value, $Res Function(_$ResourceImpl) then) =
+      __$$ResourceImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String url, String? caption});
+}
+
+/// @nodoc
+class __$$ResourceImplCopyWithImpl<$Res>
+    extends _$ResourceCopyWithImpl<$Res, _$ResourceImpl>
+    implements _$$ResourceImplCopyWith<$Res> {
+  __$$ResourceImplCopyWithImpl(
+      _$ResourceImpl _value, $Res Function(_$ResourceImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? url = null,
+    Object? caption = freezed,
+  }) {
+    return _then(_$ResourceImpl(
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+      caption: freezed == caption
+          ? _value.caption
+          : caption // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ResourceImpl implements _Resource {
+  const _$ResourceImpl({required this.url, this.caption});
+
+  factory _$ResourceImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ResourceImplFromJson(json);
+
+  @override
+  final String url;
+  @override
+  final String? caption;
+
+  @override
+  String toString() {
+    return 'Resource(url: $url, caption: $caption)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ResourceImpl &&
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.caption, caption) || other.caption == caption));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, url, caption);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ResourceImplCopyWith<_$ResourceImpl> get copyWith =>
+      __$$ResourceImplCopyWithImpl<_$ResourceImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ResourceImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Resource implements Resource {
+  const factory _Resource({required final String url, final String? caption}) =
+      _$ResourceImpl;
+
+  factory _Resource.fromJson(Map<String, dynamic> json) =
+      _$ResourceImpl.fromJson;
+
+  @override
+  String get url;
+  @override
+  String? get caption;
+  @override
+  @JsonKey(ignore: true)
+  _$$ResourceImplCopyWith<_$ResourceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

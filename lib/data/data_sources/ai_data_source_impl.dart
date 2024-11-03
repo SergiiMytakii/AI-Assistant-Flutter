@@ -10,17 +10,35 @@ final memory = ConversationBufferMemory(returnMessages: true);
 @prod
 @Injectable(as: AiDataSource)
 class AiDataSourceImpl implements AiDataSource {
-  final llm = ChatOpenAI(
-    apiKey: openAIKey,
-    defaultOptions: const ChatOpenAIOptions(
-      model: 'gpt-4o-mini',
-      responseFormat: ChatOpenAIResponseFormat.jsonObject,
-    ),
-  );
   @override
   Future<Map<String, dynamic>> getAiResponse(
       PromptTemplate promptTemplate, Map<String, dynamic> query) async {
+    final llm = ChatOpenAI(
+      apiKey: openAIKey,
+      defaultOptions: const ChatOpenAIOptions(
+        model: 'gpt-4o-mini',
+        responseFormat: ChatOpenAIResponseFormat.jsonObject,
+        temperature: 0.1,
+      ),
+    );
     final chain = promptTemplate.pipe(llm).pipe(JsonOutputParser());
+    final result = await chain.invoke(query);
+    return result;
+  }
+
+  @override
+  Future<String> getStringAiResponse(
+      PromptTemplate promptTemplate, Map<String, dynamic> query) async {
+    final llm = ChatOpenAI(
+      apiKey: openAIKey,
+      defaultOptions: const ChatOpenAIOptions(
+        model: 'gpt-4o-mini',
+        responseFormat: ChatOpenAIResponseFormat.text,
+        temperature: 0.1,
+      ),
+    );
+
+    final chain = promptTemplate.pipe(llm).pipe(const StringOutputParser());
     final result = await chain.invoke(query);
     return result;
   }
@@ -28,6 +46,13 @@ class AiDataSourceImpl implements AiDataSource {
   @override
   Future<Map<String, dynamic>> getAiChatResponse(
       ChatPromptTemplate promptTemplate, Map<String, dynamic> query) async {
+    final llm = ChatOpenAI(
+      apiKey: openAIKey,
+      defaultOptions: const ChatOpenAIOptions(
+        model: 'gpt-4o-mini',
+        responseFormat: ChatOpenAIResponseFormat.jsonObject,
+      ),
+    );
     print(promptTemplate
         .inputVariables); // Should print {'outputTemplate', 'context', 'input'}
     final chain = Runnable.fromMap({

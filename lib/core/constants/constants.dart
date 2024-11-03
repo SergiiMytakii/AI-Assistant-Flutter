@@ -5,8 +5,9 @@ Map<String, String> languagesCodes = {
   'en': 'English',
   'ru': 'Russian',
   'uk': 'Ukrainian',
+  'fr': 'French',
+  'es': 'Spanish',
   // 'et': 'Estonian',
-  // 'fr': 'French',
   // 'de': 'German',
   // 'bg': 'Bulgarian',
   // 'it': 'Italian',
@@ -15,7 +16,6 @@ Map<String, String> languagesCodes = {
   // 'no': 'Norwegian',
   // 'pl': 'Polish',
   // 'ro': 'Romanian',
-  // 'es': 'Spanish',
   // 'sv': 'Swedish',
 };
 
