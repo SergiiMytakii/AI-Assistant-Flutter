@@ -20,6 +20,8 @@ import 'package:ai_assiatant_flutter/data/repositories/chat_repository_impl.dart
     as _i853;
 import 'package:ai_assiatant_flutter/data/repositories/docs_repository_impl.dart'
     as _i22;
+import 'package:ai_assiatant_flutter/data/repositories/translations_repository_impl.dart'
+    as _i588;
 import 'package:ai_assiatant_flutter/data/use_cases/auth/sign_in_by_uuid_use_case.dart'
     as _i882;
 import 'package:ai_assiatant_flutter/data/use_cases/auth/sign_in_use_case.dart'
@@ -42,12 +44,16 @@ import 'package:ai_assiatant_flutter/domain/repositories/chat_repository.dart'
     as _i536;
 import 'package:ai_assiatant_flutter/domain/repositories/docs_repository.dart'
     as _i1009;
+import 'package:ai_assiatant_flutter/domain/repositories/translations_repository.dart'
+    as _i493;
 import 'package:ai_assiatant_flutter/presentation/bloc/auth/auth_bloc.dart'
     as _i521;
 import 'package:ai_assiatant_flutter/presentation/bloc/chat/chat_cubit.dart'
     as _i745;
 import 'package:ai_assiatant_flutter/presentation/bloc/docs/docs_cubit.dart'
     as _i705;
+import 'package:ai_assiatant_flutter/presentation/bloc/translations/cubit/translations_cubit.dart'
+    as _i304;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -80,6 +86,14 @@ extension GetItInjectableX on _i174.GetIt {
         _prod,
       },
     );
+    gh.factory<_i493.TranslationsRepository>(
+      () => _i588.TranslationsRepositoryImpl(
+          firebaseDataSource: gh<_i1002.FirebaseDataSource>()),
+      registerFor: {
+        _dev,
+        _prod,
+      },
+    );
     gh.factory<_i68.SupabaseDataSource>(
       () => _i184.SupabaseDataSourceImpl(),
       registerFor: {
@@ -101,6 +115,8 @@ extension GetItInjectableX on _i174.GetIt {
         _prod,
       },
     );
+    gh.singleton<_i304.TranslationsCubit>(
+        () => _i304.TranslationsCubit(gh<_i493.TranslationsRepository>()));
     gh.factory<_i975.UserStreamUseCase>(
         () => _i975.UserStreamUseCase(gh<_i530.AuthenticationRepository>()));
     gh.factory<_i882.SignInByUuidUseCase>(

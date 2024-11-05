@@ -141,8 +141,7 @@ class ChatRepositoryImpl implements ChatRepository {
       final promptTemplate = PromptTemplate.fromTemplate(r'''
     You are a very polite customer support assistant.
     Friendly greet the user in {initialLanguage} language including emoji.
-    From the new line continue in the same language with something like: 'I am a customer support assistant and I can talk on different languages. How can I help you?' 
-      
+    From the new line continue in the same language with something like: 'I am a customer support assistant and I can talk on different languages. How can I help you?'  
     Return result as valid JSON using the following structure:
         {outputTemplate}
       ''');

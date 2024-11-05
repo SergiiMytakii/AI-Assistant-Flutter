@@ -11,12 +11,11 @@ class F {
   static String get title {
     switch (appFlavor) {
       case Flavor.dev:
-        return 'My Template Dev';
+        return 'AI Assistant Dev';
       case Flavor.prod:
-        return 'My Template Prod';
+        return 'AI Assistant Prod';
       default:
         return 'title';
     }
   }
-
 }

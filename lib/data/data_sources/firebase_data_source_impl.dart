@@ -56,9 +56,7 @@ class FirebaseDataSourceImpl implements FirebaseDataSource {
 
   @override
   Future<DocumentSnapshot> getOneFromFirebaseDB(
-      {required String collectionName,
-      Map<String, dynamic>? fields,
-      required String docReference}) async {
+      {required String collectionName, required String docReference}) async {
     try {
       final CollectionReference collection = db.collection(collectionName);
       final DocumentReference documentRef = collection.doc(docReference);

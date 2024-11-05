@@ -5,8 +5,8 @@ Map<String, String> languagesCodes = {
   'en': 'English',
   'ru': 'Russian',
   'uk': 'Ukrainian',
-  'fr': 'French',
-  'es': 'Spanish',
+  // 'fr': 'French',
+  // 'es': 'Spanish',
   // 'et': 'Estonian',
   // 'de': 'German',
   // 'bg': 'Bulgarian',
@@ -19,4 +19,4 @@ Map<String, String> languagesCodes = {
   // 'sv': 'Swedish',
 };
 
-enum FirebaseCollections { users, qAndAs }
+enum FirebaseCollections { users, qAndAs, assets }

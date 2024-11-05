@@ -1,3 +1,4 @@
+import 'package:ai_assiatant_flutter/flavors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -17,14 +18,16 @@ class _RootScreenState extends State<RootScreen> {
   int? _selectedIndex;
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        if (kIsWeb && constraints.maxWidth > 500) {
-          return _buildWebRootBody(context);
-        } else {
-          return _buildMobileRootBody(context);
-        }
-      },
+    return _flavorBanner(
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          if (kIsWeb && constraints.maxWidth > 500) {
+            return _buildWebRootBody(context);
+          } else {
+            return _buildMobileRootBody(context);
+          }
+        },
+      ),
     );
   }
 
@@ -56,6 +59,9 @@ class _RootScreenState extends State<RootScreen> {
                         case 2:
                           context.go('/settings');
                           break;
+                        case 3:
+                          context.go('/help');
+                          break;
                       }
                     },
                     destinations: [
@@ -70,6 +76,10 @@ class _RootScreenState extends State<RootScreen> {
                       NavigationRailDestination(
                         icon: const Icon(Icons.settings),
                         label: Text(context.tr('Settings')),
+                      ),
+                      NavigationRailDestination(
+                        icon: const Icon(Icons.question_mark),
+                        label: Text(context.tr('Help')),
                       ),
                     ],
                   ),
@@ -96,6 +106,7 @@ class _RootScreenState extends State<RootScreen> {
     return Scaffold(
       body: widget.child,
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex ?? 0,
         onTap: (int index) {
           setState(() {
@@ -110,6 +121,13 @@ class _RootScreenState extends State<RootScreen> {
               break;
             case 2:
               context.go('/settings');
+              break;
+            case 3:
+              context.go('/help');
+              break;
+            case 4:
+              getIt<AuthenticationBloc>()
+                  .add(const AuthenticationEvent.signOutRequested());
               break;
           }
         },
@@ -126,8 +144,36 @@ class _RootScreenState extends State<RootScreen> {
             icon: const Icon(Icons.settings),
             label: context.tr('Settings'),
           ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.question_mark),
+            label: context.tr('Help'),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.logout),
+            label: context.tr('Logout'),
+          ),
         ],
       ),
     );
   }
 }
+
+Widget _flavorBanner({
+  required Widget child,
+  bool show = true,
+}) =>
+    show
+        ? Banner(
+            location: BannerLocation.topStart,
+            message: F.name,
+            color: Colors.green.withOpacity(0.6),
+            textStyle: const TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 12.0,
+                letterSpacing: 1.0),
+            // textDirection: TextDirection.LTR ,
+            child: child,
+          )
+        : Container(
+            child: child,
+          );

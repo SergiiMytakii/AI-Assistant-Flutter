@@ -2,6 +2,7 @@ import 'package:ai_assiatant_flutter/injection.dart';
 import 'package:ai_assiatant_flutter/presentation/bloc/auth/auth_bloc.dart';
 import 'package:ai_assiatant_flutter/presentation/bloc/chat/chat_cubit.dart';
 import 'package:ai_assiatant_flutter/presentation/bloc/docs/docs_cubit.dart';
+import 'package:ai_assiatant_flutter/presentation/bloc/translations/cubit/translations_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,6 +21,9 @@ class MyMultiblocProvider extends StatelessWidget {
       ),
       BlocProvider<ChatCubit>(
         create: (context) => getIt<ChatCubit>(),
+      ),
+      BlocProvider<TranslationsCubit>(
+        create: (context) => getIt<TranslationsCubit>(),
       ),
     ], child: child);
   }

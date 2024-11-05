@@ -85,7 +85,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       final isConfirmed = await showAlertDialog(
                                           context,
                                           'Are you sure you want to delete this file?'
-                                              .tr());
+                                              .tr(),
+                                          showCancelButton: true);
                                       if (isConfirmed) {
                                         getIt<DocsCubit>().deleteFile();
                                       }

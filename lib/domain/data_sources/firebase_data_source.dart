@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:ai_assiatant_flutter/domain/entities/user/user.dart';
 import 'package:firebase_cloud_firestore/firebase_cloud_firestore.dart';
 
 abstract class FirebaseDataSource {
@@ -24,9 +22,7 @@ abstract class FirebaseDataSource {
       {required String collectionName, required String id});
 
   Future<DocumentSnapshot> getOneFromFirebaseDB(
-      {required String collectionName,
-      Map<String, dynamic>? fields,
-      required String docReference});
+      {required String collectionName, required String docReference});
 
   Future<String> uploadFileToFirebaseStorage(String folder, File file);
   Future<File> downloadFileFromFirebaseStorage(String folder, File file);

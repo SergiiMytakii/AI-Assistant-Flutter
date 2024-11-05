@@ -2,6 +2,7 @@
 import 'dart:async';
 
 import 'package:ai_assiatant_flutter/main.dart';
+import 'package:ai_assiatant_flutter/presentation/screens/help/help_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,7 +58,6 @@ final GoRouter router = GoRouter(
       navigatorKey: _shellNavigatorKey,
       pageBuilder: (BuildContext context, GoRouterState state, Widget child) {
         final authState = context.watch<AuthenticationBloc>().state;
-        print('Auth state: $authState');
         return authState.maybeWhen(
           authenticated: (User user) {
             if (user.isAdmin) {
@@ -104,16 +104,25 @@ final GoRouter router = GoRouter(
           },
         ),
         GoRoute(
-          path: '/:uuid',
+          path: '/help',
           pageBuilder: (BuildContext context, GoRouterState state) {
-            final uuid = state.pathParameters['uuid'];
-            logger.i('Used path with uuid: $uuid');
             return NoTransitionPage<void>(
               key: state.pageKey,
-              child: const ChatScreen(),
+              child: const HelpScreen(),
             );
           },
-        )
+        ),
+        // GoRoute(
+        //   path: '/:uuid',
+        //   pageBuilder: (BuildContext context, GoRouterState state) {
+        //     final uuid = state.pathParameters['uuid'];
+        //     logger.i('Used path with uuid: $uuid');
+        //     return NoTransitionPage<void>(
+        //       key: state.pageKey,
+        //       child: const ChatScreen(),
+        //     );
+        //   },
+        // )
       ],
     ),
   ],
